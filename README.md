@@ -1,0 +1,4 @@
+btchip-doc
+==========
+
+Firmware documentation
