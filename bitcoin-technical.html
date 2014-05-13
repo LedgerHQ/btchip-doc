@@ -738,7 +738,7 @@ asciidoc.install(2);
 <h1>BTChip : Technical Specification</h1>
 <span id="author">BTChip</span><br />
 <span id="email"><tt>&lt;<a href="mailto:contact@btchip.com">contact@btchip.com</a>&gt;</tt></span><br />
-<span id="revdate">firmware version 1.4.3 - 20.03.14-1</span>
+<span id="revdate">firmware version 1.4.4 - 13.05.14-1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -746,7 +746,49 @@ asciidoc.install(2);
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_1_4_3_30c3_release_hopefully_p_20_03_paymium_meetup_release">1. 1.4.3 (30c3 release hopefully :p - 20.03 Paymium Meetup release)</h2>
+<h2 id="_1_4_4_maison_du_bitcoin_opening_release_13th_of_may_2014">1. 1.4.4 ("Maison du Bitcoin" opening release - 13th of May 2014)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+[bug] Fix BIP32 implementation regarding hardneded / non hardened keys
+</p>
+</li>
+<li>
+<p>
+[enh] Implement missing 1.4.3 features
+</p>
+</li>
+<li>
+<p>
+[enh] Type the seed using the second factor
+</p>
+</li>
+<li>
+<p>
+[enh] Add firmware version in attestation
+</p>
+</li>
+<li>
+<p>
+[enh] Restrict signature hashtypes on setup
+</p>
+</li>
+<li>
+<p>
+[enh] Provide forward setup for prepaid dongles scenarios
+</p>
+</li>
+<li>
+<p>
+[enh] Secure screen mode for Prismicide prototype
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_4_3_30c3_failed_release_p_20th_of_march_2014_paymium_meetup_release">2. 1.4.3 (30c3 failed release :p - 20th of March 2014 Paymium Meetup release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -758,7 +800,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_2_bitcoin_2013_release">2. 1.4.2 (Bitcoin 2013 release)</h2>
+<h2 id="_1_4_2_bitcoin_2013_release">3. 1.4.2 (Bitcoin 2013 release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -770,7 +812,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_1_private_release">3. 1.4.1 (private release)</h2>
+<h2 id="_1_4_1_private_release">4. 1.4.1 (private release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -787,7 +829,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_0_29c3_release">4. 1.4.0 (29c3 release)</h2>
+<h2 id="_1_4_0_29c3_release">5. 1.4.0 (29c3 release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -799,13 +841,13 @@ Initial release
 </div>
 </div>
 <div class="sect1">
-<h2 id="_about">5. About</h2>
+<h2 id="_about">6. About</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>BTChip is a USB smartcard/dongle dedicated to secure bitcoin transactions. It performs all sensitive cryptographic operations related to a bitcoin transaction (key generation &amp; signature) onboard, and helps protect against malware in an untrusted environment by controlling the signed data.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_user_validation">6. User validation</h2>
+<h2 id="_user_validation">7. User validation</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>BTChip allows you to validate what you sign - i.e. check that you are paying the right amount to the right destination.</p></div>
 <div class="paragraph"><p>User validation is performed as follows :</p></div>
@@ -844,7 +886,7 @@ The user enters the PIN to confirm user validation
 </div>
 </div>
 <div class="sect1">
-<h2 id="_operation_modes">7. Operation modes</h2>
+<h2 id="_operation_modes">8. Operation modes</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Operation modes define which operations are allowed given the security environment the dongle is operating in.</p></div>
 <div class="paragraph"><p>Four operation modes are defined :</p></div>
@@ -870,17 +912,9 @@ developer mode, managing BIP 32 or regular private keys and allowing to sign arb
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>The dongle initally operates in standard-wallet mode when received. The last chosen mode is restored when the dongle is powered on.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">In this version, only standard-wallet mode is supported</td>
-</tr></table>
-</div>
+<div class="paragraph"><p>The dongle initally operates in standard-wallet mode when received (if this mode is enabled). The last chosen mode is restored when the dongle is powered on.</p></div>
 <div class="sect2">
-<h3 id="_standard_wallet_mode">7.1. standard-wallet mode</h3>
+<h3 id="_standard_wallet_mode">8.1. standard-wallet mode</h3>
 <div class="paragraph"><p>Only a single point-to-point output (i.e. the standard script or a P2SH script) along with one change address on the external chain is authorized.</p></div>
 <div class="paragraph"><p>All transaction inputs are controlled by the dongle.</p></div>
 <div class="paragraph"><p>The change address index is automatically handled by the dongle and increased for each transaction to prevent address reuse. The change address index is shared for all accounts.</p></div>
@@ -919,7 +953,7 @@ Fees
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_relaxed_wallet_mode">7.2. relaxed-wallet mode</h3>
+<h3 id="_relaxed_wallet_mode">8.2. relaxed-wallet mode</h3>
 <div class="paragraph"><p>Arbitrary output is authorized</p></div>
 <div class="paragraph"><p>Transaction inputs are only controlled if they use a key actually belonging to a wallet account.</p></div>
 <div class="paragraph"><p>Transaction are controlled by the user validation process. The following data will be prompted to the user :</p></div>
@@ -942,7 +976,7 @@ A large warning that relaxed-wallet mode is in use
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_server_mode">7.3. server mode</h3>
+<h3 id="_server_mode">8.3. server mode</h3>
 <div class="paragraph"><p>Arbitrary output is authorized</p></div>
 <div class="paragraph"><p>Transaction inputs are only controlled if they use a key actually belonging to a wallet account.</p></div>
 <div class="paragraph"><p>Transactions are controlled given user parameters and automatically signed if accepted.</p></div>
@@ -961,28 +995,145 @@ A maximum number of consecutive transactions before the dongle is removed
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_developer_mode">7.4. developer mode</h3>
+<h3 id="_developer_mode">8.4. developer mode</h3>
 <div class="paragraph"><p>Arbitrary data can be signed in this mode</p></div>
 <div class="paragraph"><p>Keys used in developer mode cannot be used in a different mode</p></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lifecycle_management_apdus">8. Lifecycle management APDUs</h2>
+<h2 id="_lifecycle_management_apdus">9. Lifecycle management APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_setup">8.1. SETUP</h3>
+<h3 id="_setup_secure_screen">9.1. SETUP SECURE SCREEN</h3>
 <div class="sect3">
-<h4 id="_description">8.1.1. Description</h4>
-<div class="paragraph"><p>This command is used to setup the dongle when received. It must be executed on a trusted computer as security critical data is exchanged.</p></div>
+<h4 id="_description">9.1.1. Description</h4>
+<div class="paragraph"><p>This command is used to operate the dongle in a standalone terminal - instead of typing back second factor data to the user, it will be returned encrypted by the provided 3DES-2 key, which should be stored as securely as possible by the standalone terminal.</p></div>
+<div class="paragraph"><p>This command is mostly intended for demonstration purposes, and is used by the Prismicide prototype.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">This function is not supported in this version</td>
+</tr></table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_coding">9.1.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">2C</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">3DES-2 key shared by the standalone terminal</p></td>
+<td align="left" valign="top"><p class="table">16</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is only available before the dongle is set up (either when received or following a dongle reset)</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup">9.2. SETUP</h3>
+<div class="sect3">
+<h4 id="_description_2">9.2.1. Description</h4>
+<div class="paragraph"><p>This command is used to setup the dongle when received, or pre-issuance when using the forward setup mode. It must be executed on a trusted computer as security critical data is exchanged.</p></div>
 <div class="paragraph"><p>For a new dongle not used as a backup device, a regular user will create a new random seed for a HD wallet and a PIN.</p></div>
-<div class="paragraph"><p>The PIN is used to perform a new payment transaction - it is sent as cleartext to the dongle and is not intended to be used as a malware protection method, only as an anti theft security.</p></div>
+<div class="paragraph"><p>The PIN is used to perform a new payment transaction - it is sent as cleartext to the dongle and is not intended to be used as a malware protection method, only as an anti theft security.
+When generating a new seed in regular setup mode, the dongle types it once on the next powerup. It is recommended to do this on a different computer / device for maximum security before backing it up.</p></div>
+<div class="paragraph"><p>In forward setup mode, a secret PIN is exchanged between the user and the dongle. The seed is generated but not typed, and only GET WALLET PUBLIC KEY is enabled, without needing to enter the PIN. The seed will be typed the first time the PIN is entered, after choosing a keymap. This mode is typically used for a service (such as a web shop or a vending machine) offering prepaid dongles and willing to provide the seed to the end user without compromising the security of the transactions.</p></div>
 <div class="paragraph"><p>After SETUP is performed, the dongle has to be reset to wipe out all parameters and start again - this can be achieved by entering the wrong PIN 3 times in a row.</p></div>
 <div class="paragraph"><p>A wipe PIN can be provided for plausible deniability - when entered instead of the regular user PIN, the seed is replaced by a random one and the device keeps operating.</p></div>
 <div class="paragraph"><p>It is recommended to store the BIP32 seed returned in the output of the SETUP command in a safe location for backup purposes - typically GPG encrypt it to yourself and store it on multiple storage devices / clouds.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding">8.1.2. Coding</h4>
+<h4 id="_coding_2">9.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1007,7 +1158,8 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">E0</p></td>
 <td align="left" valign="top"><p class="table">20</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00 : regular setup</p>
+<p class="table">                    80 : forward setup</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
@@ -1015,7 +1167,7 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p><em>Input data (regular setup)</em></p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -1033,8 +1185,14 @@ cellspacing="0" cellpadding="4">
 <p class="table">    0x01 : wallet mode</p>
 <p class="table">    0x02 : relaxed wallet mode</p>
 <p class="table">    0x04 : server mode</p>
-<p class="table">    0x08 : developer mode</p>
-<p class="table">    0x80 : enable RFC 6979 deterministic signatures (otherwise use a random K)</p></td>
+<p class="table">    0x08 : developer mode</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Bitflag of features</p>
+<p class="table">    0x01 : use uncompressed public keys in addresses (otherwise compress them)</p>
+<p class="table">    0x02 : enable RFC 6979 deterministic signatures (otherwise use a random K)</p>
+<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
@@ -1062,12 +1220,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Number of keymap encodings (at least 0x01)</p></td>
-<td align="left" valign="top"><p class="table">1</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Keymap encodings</p></td>
-<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">Keymap encoding (details below)</p></td>
+<td align="left" valign="top"><p class="table">119</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">BIP32 Seed flag (0x00 to generate a new seed, 0x01 to restore a seed backup)</p></td>
@@ -1089,16 +1243,131 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p>When enabled, RFC 6979 deterministic signatures will be used for all operations in wallet, relaxed wallet and server modes, and will be optionally available in developer mode.</p></div>
+<div class="paragraph"><p><em>Input data (forward setup)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Bitflag of supported operation modes</p>
+<p class="table">    0x01 : wallet mode</p>
+<p class="table">    0x02 : relaxed wallet mode</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Bitflag of features</p>
+<p class="table">    0x01 : use uncompressed public keys in addresses (otherwise compress them)</p>
+<p class="table">    0x02 : enable RFC 6979 deterministic signatures (otherwise use a random K)</p>
+<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Key version accepted for regular addresses</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Key version accepted for Pay To Script Hash Addresses (BIP 16), or 0x00 if disabled</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">User public key length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">User public key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Password blob</p></td>
+<td align="left" valign="top"><p class="table">40</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">BIP32 Seed flag (0x00 to generate a new seed)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">User entropy if generating a new seed</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">3DES-2 key wrapping key length for developer mode (0x00 to generate a new key)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>The password blob is generated as follows :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+An ECDH key exchange is performed on the user side using a newly generated keypair on the Bitcoin curve and the dongle Attestation public key - a 32 bytes secret is obtained, split into two 16 bytes components S1 and S2
+</p>
+</li>
+<li>
+<p>
+S1 and S2 are XORed to produce a 16 bytes 3DES-2 session key
+</p>
+</li>
+<li>
+<p>
+The following data is encrypted using 3DES CBC and the generated session key, and sent as password blob
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">User PIN length (from 0x04 up to 0x20)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">User PIN (padded with random)</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Wipe PIN length (from 0x00 up to 0x04)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Wipe PIN (padded with random)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">CRC-16 of the previous data</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Additional description of setup parameters</em></p></div>
+<div class="paragraph"><p>When enabled, RFC 6979 deterministic signatures will be used for all operations in wallet, relaxed wallet and server modes. RFC 6979 deterministic signatures are always available in developer mode.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">Using deterministic signatures will make the signing process slower and could possibly create a larger side channel attack surface due to the way private keys are handled during the computation of the random value. We suggest to only enable this mode if you don&#8217;t trust the chip hardware Random Number Generator.</td>
+<td class="content">Using deterministic signatures will make the signing process slower and could possibly create a larger side channel attack surface due to the way private keys are handled during the computation of the random value. We suggest to only enable this mode if you don&#8217;t trust the chip hardware Random Number Generator or are sure of understanding the risks.</td>
 </tr></table>
 </div>
-<div class="paragraph"><p>The following Key version are suggested for regular addresses</p></div>
+<div class="paragraph"><p>The following sample Key versions are defined for regular addresses</p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -1138,7 +1407,7 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p>The following Key version are suggested for Pay To Script Hash addresses</p></div>
+<div class="paragraph"><p>The following sample Key version are defined for Pay To Script Hash addresses</p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -1163,8 +1432,8 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>If generating a new seed, the dongle generates a 32 bytes random from its hardware Random Number Generator and performs an exclusive OR between this number and the provided user entropy to create the seed.</p></div>
-<div class="paragraph"><p>A keymap encoding is a set of Keyboard HID Usage IDs mapping the keyboard layout of the computer on which the user validation is performed. If several keymap encodings are provided, the user validation will be typed using all provided encodings, separated by a Carriage Return.</p></div>
-<div class="paragraph"><p>Each keymap encoding is coded as follows</p></div>
+<div class="paragraph"><p>A keymap encoding is a set of Keyboard HID Usage IDs mapping the keyboard layout of the computer on which the user validation is performed. It can be updated later using the SET KEYMAP command.</p></div>
+<div class="paragraph" id="KeymapEncoding"><p>Keymap encoding is coded as follows</p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -1178,43 +1447,36 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Flags</p>
-<p class="table">    0x01 : Numbers are typed with SHIFT key pushed
-    0x02 : Decimal mark is typed with SHIFT key pushed</p></td>
-<td align="left" valign="top"><p class="table">1</p></td>
+<td align="left" valign="top"><p class="table">ALT-GR usage keymap</p></td>
+<td align="left" valign="top"><p class="table">12</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Hid mapping codes from <em>0</em> to <em>9</em></p></td>
-<td align="left" valign="top"><p class="table">10</p></td>
+<td align="left" valign="top"><p class="table">Shift usage keymap</p></td>
+<td align="left" valign="top"><p class="table">12</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Hid mapping codes from <em>A</em> to <em>Z</em></p></td>
-<td align="left" valign="top"><p class="table">26</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Hid mapping code for decimal mark</p></td>
-<td align="left" valign="top"><p class="table">1</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Hid mapping code for SPACE</p></td>
-<td align="left" valign="top"><p class="table">1</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Hid mapping code for RETURN</p></td>
-<td align="left" valign="top"><p class="table">1</p></td>
+<td align="left" valign="top"><p class="table">HID page table for ASCII codes from 0x20 to 0x7e</p></td>
+<td align="left" valign="top"><p class="table">95</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<div class="paragraph"><p>ALT-GR &amp; Shift usage keymaps are coded as a set of flags indicating if the ALT-GR / Shift key should be pushed for the given mapping. First byte codes shift flags from keycode 0x20 (LSB) to 0x27 (MSB) and so on.</p></div>
 <div class="paragraph"><p>The default QWERTY Keymap Encoding is</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>00
-27 1E 1F 20 21 22 23 24 25 26
-04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D
-37
-2C
-28</tt></pre>
+<pre><tt>00 00 00 00 00 00 00 00 00 00 00 00
+76 0f 00 d4 ff ff ff c7 00 00 00 78
+2c 1e 34 20 21 22 24 34 26 27
+25 2e 36 2d 37 38 27 1e 1f 20
+21 22 23 24 25 26 33 33 36 2e
+37 38 1f 04 05 06 07 08 09 0a
+0b 0c 0d 0e 0f 10 11 12 13 14
+15 16 17 18 19 1a 1b 1c 1d 2f
+31 30 23 2d 35 04 05 06 07 08
+09 0a 0b 0c 0d 0e 0f 10 11 12
+13 14 15 16 17 18 19 1a 1b 1c
+1d 2f 31 30 35</tt></pre>
 </div></div>
 <div class="paragraph"><p><em>Output data</em></p></div>
 <div class="tableblock">
@@ -1230,16 +1492,10 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Random generated, or 00..00 if restoring an existing seed</p></td>
-<td align="left" valign="top"><p class="table">32</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">BIP32 Seed</p></td>
-<td align="left" valign="top"><p class="table">32</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Server HOTP limit operation key</p></td>
-<td align="left" valign="top"><p class="table">48</p></td>
+<td align="left" valign="top"><p class="table">Seed return flag</p>
+<p class="table">      0x00 : seed is not typed to the user</p>
+<p class="table">      0x01 : seed typed to the user</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">3DES-2 trusted input key</p></td>
@@ -1297,16 +1553,17 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verify_pin">8.2. VERIFY PIN</h3>
+<h3 id="_verify_pin">9.3. VERIFY PIN</h3>
 <div class="sect3">
-<h4 id="_description_2">8.2.1. Description</h4>
+<h4 id="_description_3">9.3.1. Description</h4>
 <div class="paragraph"><p>This command is used to unlock the dongle using the PIN provided during setup.</p></div>
+<div class="paragraph"><p>If forward setup mode was used, the seed will be typed to the user on the first PIN entry and signature operations are enabled if a keymap was set. Otherwise the command will be denied.</p></div>
 <div class="paragraph"><p>The dongle must be physically reset after each invalid PIN to issue a new command.</p></div>
 <div class="paragraph"><p>After 3 invalid PIN submitted in a row, the dongle data is erased and it must be setup again.</p></div>
 <div class="paragraph"><p>If the wipe PIN is entered instead of the user PIN, the device seed is replaced by a random one and the device keeps operating.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_2">8.2.2. Coding</h4>
+<h4 id="_coding_3">9.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1360,94 +1617,6 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p><em>Output data</em></p></div>
-<div class="paragraph"><p>None</p></div>
-<div class="paragraph"><p><em>Availability</em></p></div>
-<div class="paragraph"><p>This function is always available following dongle setup.</p></div>
-<div class="paragraph"><p><em>Status Words</em></p></div>
-<div class="tableblock">
-<table rules="all"
-width="80%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="50%" />
-<col width="50%" />
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6581</p></td>
-<td align="left" valign="top"><p class="table">Memory problem</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6700</p></td>
-<td align="left" valign="top"><p class="table">Incorrect length</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6982</p></td>
-<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6B00</p></td>
-<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6Fxx</p></td>
-<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">9000</p></td>
-<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_get_operation_mode">8.3. GET OPERATION MODE</h3>
-<div class="sect3">
-<h4 id="_description_3">8.3.1. Description</h4>
-<div class="paragraph"><p>This command returns the current operation mode used by the dongle</p></div>
-</div>
-<div class="sect3">
-<h4 id="_coding_3">8.3.2. Coding</h4>
-<div class="paragraph"><p><em>Command</em></p></div>
-<div class="tableblock">
-<table rules="all"
-width="80%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">E0</p></td>
-<td align="left" valign="top"><p class="table">24</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">01</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="paragraph"><p><em>Input data</em></p></div>
-<div class="paragraph"><p>None</p></div>
-<div class="paragraph"><p><em>Output data</em></p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -1461,11 +1630,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Operation Mode</p>
-<p class="table">      0x01 : standard wallet</p>
-<p class="table">      0x02 : relaxed wallet</p>
-<p class="table">      0x04 : server</p>
-<p class="table">      0x08 : developer</p></td>
+<td align="left" valign="top"><p class="table">PIN validation flags</p>
+<p class="table">      0x01 : dongle was initialized in forward setup mode and needs to be power cycled to read the seed</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 </tbody>
@@ -1516,22 +1682,127 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_set_operation_mode">8.4. SET OPERATION MODE</h3>
+<h3 id="_get_operation_mode">9.4. GET OPERATION MODE</h3>
 <div class="sect3">
-<h4 id="_description_4">8.4.1. Description</h4>
-<div class="paragraph"><p>This command sets the operation mode that will be used by the dongle after the next power up</p></div>
+<h4 id="_description_4">9.4.1. Description</h4>
+<div class="paragraph"><p>This command returns the current operation mode used by the dongle</p></div>
+<div class="paragraph"><p>The forward setup mask is present if a forward setup mode was performed and the seed has not been redeemed by the end user yet.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_4">9.4.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">24</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Operation Mode</p>
+<p class="table">      0x01 : standard wallet
+      0x02 : relaxed wallet
+      0x04 : server
+      0x08 : developer</p>
+<p class="table">      0x80 : mask added if forward setup mode was used and the seed has not been redeemed yet</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available following dongle setup.</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_operation_mode">9.5. SET OPERATION MODE</h3>
+<div class="sect3">
+<h4 id="_description_5">9.5.1. Description</h4>
+<div class="paragraph"><p>This command sets the operation mode that will be used by the dongle after the next power up.</p></div>
+<div class="paragraph"><p>The dongle must be physically reset following this command.</p></div>
 <div class="paragraph"><p>If the requested mode has been disabled on setup, an error will be returned.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_coding_4">8.4.2. Coding</h4>
+<h4 id="_coding_5">9.5.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1579,10 +1850,10 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Operation Mode</p>
-<p class="table">      0x01 : standard wallet</p>
-<p class="table">      0x02 : relaxed wallet</p>
-<p class="table">      0x04 : server</p>
-<p class="table">      0x08 : developer</p></td>
+<p class="table">      0x01 : standard wallet
+      0x02 : relaxed wallet
+      0x04 : server
+      0x08 : developer</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 </tbody>
@@ -1634,19 +1905,341 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_set_keymap">9.6. SET KEYMAP</h3>
+<div class="sect3">
+<h4 id="_description_6">9.6.1. Description</h4>
+<div class="paragraph"><p>This command modifies the keymap used during the dongle setup.</p></div>
+<div class="paragraph"><p>The keymap is encoded as in <a href="#KeymapEncoding">[KeymapEncoding]</a></p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_6">9.6.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">28</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">77</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">ALT-GR usage keymap</p></td>
+<td align="left" valign="top"><p class="table">12</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift usage keymap</p></td>
+<td align="left" valign="top"><p class="table">12</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">HID page table for ASCII codes from 0x20 to 0x7e</p></td>
+<td align="left" valign="top"><p class="table">95</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available following dongle setup, and is protected by the user PIN if not operating in forward setup mode.</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_communication_protocol">9.7. SET COMMUNICATION PROTOCOL</h3>
+<div class="sect3">
+<h4 id="_description_7">9.7.1. Description</h4>
+<div class="paragraph"><p>This command sets the transport protocol used by the dongle on the next power up</p></div>
+<div class="paragraph"><p>The USB identifier used in WinUSB mode is 2581:1b7c</p></div>
+<div class="paragraph"><p>The USB identifier used in Generic HID mode is 2581:2b7c</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_7">9.7.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">2A</p></td>
+<td align="left" valign="top"><p class="table">01 : use WinUSB</p>
+<p class="table">                    02 : use Generic HID</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available.</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_secure_screen">9.8. GET SECURE SCREEN</h3>
+<div class="sect3">
+<h4 id="_description_8">9.8.1. Description</h4>
+<div class="paragraph"><p>This command is used to return the second factor encrypted by the secure screen 3DES-2 key if it was set up previously.</p></div>
+<div class="paragraph"><p>This command is mostly intended for demonstration purposes, and is used by the Prismicide prototype.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">This function is not supported in this version</td>
+</tr></table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_coding_8">9.8.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">2E</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Secure screen data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available following dongle setup.</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_wallet_usage_apdus">9. Wallet usage APDUs</h2>
+<h2 id="_wallet_usage_apdus">10. Wallet usage APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_get_wallet_public_key">9.1. GET WALLET PUBLIC KEY</h3>
+<h3 id="_get_wallet_public_key">10.1. GET WALLET PUBLIC KEY</h3>
 <div class="sect3">
-<h4 id="_description_5">9.1.1. Description</h4>
-<div class="paragraph"><p>This command returns the public key and Base58 encoded address for the given account and chain index</p></div>
+<h4 id="_description_9">10.1.1. Description</h4>
+<div class="paragraph"><p>This command returns the public key and Base58 encoded address for the given account and chain index.</p></div>
+<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_5">9.1.2. Coding</h4>
+<h4 id="_coding_9">10.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1781,14 +2374,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_trusted_input">9.2. GET TRUSTED INPUT</h3>
+<h3 id="_get_trusted_input">10.2. GET TRUSTED INPUT</h3>
 <div class="sect3">
-<h4 id="_description_6">9.2.1. Description</h4>
+<h4 id="_description_10">10.2.1. Description</h4>
 <div class="paragraph"><p>This command is used to extract a Trusted Input (encrypted transaction hash, output index, output amount) from a transaction.</p></div>
 <div class="paragraph"><p>The transaction data to be provided should be encoded using bitcoin standard raw transaction encoding. Scripts can be sent over several APDUs. Other individual transaction elements split over different APDUs will be rejected. 64 bits varints are rejected.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_6">9.2.2. Coding</h4>
+<h4 id="_coding_10">10.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1836,7 +2429,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Input index to lookup</p></td>
+<td align="left" valign="top"><p class="table">Input index to lookup (big endian)</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
@@ -1945,9 +2538,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_transaction_input_start">9.3. UNTRUSTED HASH TRANSACTION INPUT START</h3>
+<h3 id="_untrusted_hash_transaction_input_start">10.3. UNTRUSTED HASH TRANSACTION INPUT START</h3>
 <div class="sect3">
-<h4 id="_description_7">9.3.1. Description</h4>
+<h4 id="_description_11">10.3.1. Description</h4>
 <div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for a new transaction.</p></div>
 <div class="paragraph"><p>This transaction can be verified by the user and using transaction rules according to the current dongle operation mode.</p></div>
 <div class="paragraph"><p>If a new transaction is started, a VERIFY PIN command shall have been issued previously to unlock the dongle at least once following the dongle power up</p></div>
@@ -1981,7 +2574,7 @@ Scripts can be sent over several APDUs. Other individual transaction elements sp
 </ul></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_7">9.3.2. Coding</h4>
+<h4 id="_coding_11">10.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2095,9 +2688,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_transaction_input_finalize">9.4. UNTRUSTED HASH TRANSACTION INPUT FINALIZE</h3>
+<h3 id="_untrusted_hash_transaction_input_finalize">10.4. UNTRUSTED HASH TRANSACTION INPUT FINALIZE</h3>
 <div class="sect3">
-<h4 id="_description_8">9.4.1. Description</h4>
+<h4 id="_description_12">10.4.1. Description</h4>
 <div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for the transaction outputs</p></div>
 <div class="paragraph"><p>This command is rejected if all inputs advertised at the beginning of the transaction have not been processed first.</p></div>
 <div class="paragraph"><p>The generated script will be the standard script coded as below given the address for a non script address</p></div>
@@ -2112,9 +2705,10 @@ cellspacing="0" cellpadding="4">
 </div></div>
 <div class="paragraph"><p>The output amount, fees and change will be validated by the user in wallet or relaxed wallet modes.</p></div>
 <div class="paragraph"><p>The generated transaction output data contains in pre-serialized form the number of outputs (target &amp; optionally change) and each output data</p></div>
+<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_8">9.4.2. Coding</h4>
+<h4 id="_coding_12">10.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2141,7 +2735,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">46</p></td>
 <td align="left" valign="top"><p class="table">01 : output address provided as version byte + binary hash160</p>
 <p class="table">                    02 : output address provided as base58 string</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">01 : use the external chain for change (non standard, added for wallet compliance)</p>
+<p class="table">                        02 : use the internal chain for change (standard)</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
@@ -2166,7 +2761,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Output Address (base58, hash160 or Authorized Address)</p></td>
+<td align="left" valign="top"><p class="table">Output Address (base58 or hash160)</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
@@ -2275,14 +2870,15 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_sign">9.5. UNTRUSTED HASH SIGN</h3>
+<h3 id="_untrusted_hash_sign">10.5. UNTRUSTED HASH SIGN</h3>
 <div class="sect3">
-<h4 id="_description_9">9.5.1. Description</h4>
+<h4 id="_description_13">10.5.1. Description</h4>
 <div class="paragraph"><p>This command is used to sign a given secure hash using a private key (after re-hashing it following the standard Bitcoin signing process) to finalize a transaction input signing process.</p></div>
 <div class="paragraph"><p>This command will be rejected if the transaction signing state is not consistent or if a user validation is required and the provided user validation code is not correct.</p></div>
+<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_9">9.5.2. Coding</h4>
+<h4 id="_coding_13">10.5.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2438,22 +3034,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_transaction_input_finalize_full">9.6. UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL</h3>
+<h3 id="_untrusted_hash_transaction_input_finalize_full">10.6. UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL</h3>
 <div class="sect3">
-<h4 id="_description_10">9.6.1. Description</h4>
+<h4 id="_description_14">10.6.1. Description</h4>
 <div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for the transaction outputs</p></div>
 <div class="paragraph"><p>This command is rejected if all inputs advertised at the beginning of the transaction have not been processed first.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_coding_10">9.6.2. Coding</h4>
+<h4 id="_coding_14">10.6.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2478,7 +3066,8 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">E0</p></td>
 <td align="left" valign="top"><p class="table">4A</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00 : more input data to be sent</p>
+<p class="table">                    80 : last input data block to be sent</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
@@ -2486,7 +3075,7 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p><em>Input data (first block)</em></p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -2500,11 +3089,27 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Length of the Output data, including the number of outputs</p></td>
-<td align="left" valign="top"><p class="table">2</p></td>
+<td align="left" valign="top"><p class="table">Start of output data, containing the number of outputs encoded as a Bitcoin varint</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (optional next blocks)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Output data</p></td>
+<td align="left" valign="top"><p class="table">Output data continued</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 </tbody>
@@ -2589,36 +3194,47 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sign_message">9.7. SIGN MESSAGE</h3>
+<h3 id="_sign_message">10.7. SIGN MESSAGE</h3>
 <div class="sect3">
-<h4 id="_description_11">9.7.1. Description</h4>
-<div class="paragraph"><p>This command is used to sign a maximum 140 bytes long text message using a private key. The message must be ASCII printable (each byte of the message must be between 0x1f and 0x7e)</p></div>
+<h4 id="_description_15">10.7.1. Description</h4>
+<div class="paragraph"><p>This command is used to sign a maximum 140 bytes long text message using a private key. The message must be ASCII printable (each byte of the message must be between 0x20 and 0x7e, both included)</p></div>
 <div class="paragraph"><p>The message is provided to the dongle, which types it along with a single usage transaction PIN when it&#8217;s power cycled.</p></div>
 <div class="paragraph"><p>The transaction PIN is then sent back to this command to retrieve the message signature</p></div>
-<div class="paragraph"><p>The signature is performed using Bitcoin-Qt algorithm :</p></div>
+<div class="paragraph"><p>The signature is performed as follows :</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-The data to sign is the magic "Bitcoin Signed Message:\n" followed by the length of the message to sign on 1 byte followed by the binary content of the message
+The data to sign is the magic "\x18Bitcoin Signed Message:\n" - followed by the length of the message to sign on 1 byte (if requested) followed by the binary content of the message
 </p>
 </li>
 <li>
 <p>
-The signature is performed on a double SHA-256 hash of the data to sign
+The signature is performed on a double SHA-256 hash of the data to sign using the selected private key
 </p>
 </li>
 </ul></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
+<div class="paragraph"><p>The signature is returned using the standard ASN-1 encoding. To convert it to the proprietary Bitcoin-QT format, the host has to :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Perform key recovery on the signature as defined in SEC 1 paragraph 4.1.6
+</p>
+</li>
+<li>
+<p>
+Add 27 to j if the public key is not compressed, otherwise add 31 to j
+</p>
+</li>
+<li>
+<p>
+Return the Base64 encoded version of j || r || s
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_11">9.7.2. Coding</h4>
+<h4 id="_coding_15">10.7.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2704,7 +3320,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">User validation code length</p></td>
+<td align="left" valign="top"><p class="table">User validation code length (or 00 in server mode)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
@@ -2715,7 +3331,27 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p><em>Output data in prepare mode</em></p></div>
-<div class="paragraph"><p>None</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction user validation flag</p>
+<p class="table">      0x00 : no user validation requested</p>
+<p class="table">      0x01 : user validation requested</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="paragraph"><p><em>Output data in sign mode</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2737,7 +3373,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p><em>Availability</em></p></div>
-<div class="paragraph"><p>This function is always available following dongle setup in standard wallet, relaxed wallet and server operation modes.</p></div>
+<div class="paragraph"><p>This function is always available following dongle setup in standard wallet, relaxed wallet and server operation modes and is protected by the user PIN when preparing a message to sign (P1 set to 0x00)</p></div>
 <div class="paragraph"><p><em>Status Words</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2792,130 +3428,15 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_get_internal_chain_index">9.8. GET INTERNAL CHAIN INDEX</h3>
-<div class="sect3">
-<h4 id="_description_12">9.8.1. Description</h4>
-<div class="paragraph"><p>This command returns the current index used for the internal chain of all accounts.</p></div>
-<div class="paragraph"><p>This index starts at 0 and is incremented any time a change address is generated in a transaction.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_coding_12">9.8.2. Coding</h4>
-<div class="paragraph"><p><em>Command</em></p></div>
-<div class="tableblock">
-<table rules="all"
-width="80%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">E0</p></td>
-<td align="left" valign="top"><p class="table">4C</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">04</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="paragraph"><p><em>Input data</em></p></div>
-<div class="paragraph"><p>None</p></div>
-<div class="paragraph"><p><em>Output data</em></p></div>
-<div class="tableblock">
-<table rules="all"
-width="80%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="50%" />
-<col width="50%" />
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Chain index</p></td>
-<td align="left" valign="top"><p class="table">4</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="paragraph"><p><em>Availability</em></p></div>
-<div class="paragraph"><p>This function is always available following dongle setup in standard wallet, relaxed wallet and server operation modes.</p></div>
-<div class="paragraph"><p><em>Status Words</em></p></div>
-<div class="tableblock">
-<table rules="all"
-width="80%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="50%" />
-<col width="50%" />
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
-<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6581</p></td>
-<td align="left" valign="top"><p class="table">Memory problem</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6700</p></td>
-<td align="left" valign="top"><p class="table">Incorrect length</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6982</p></td>
-<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6B00</p></td>
-<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">6Fxx</p></td>
-<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">9000</p></td>
-<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_server_mode_apdus">10. Server mode APDUs</h2>
+<h2 id="_server_mode_apdus">11. Server mode APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_get_transaction_limit">10.1. GET TRANSACTION LIMIT</h3>
+<h3 id="_get_transaction_limit">11.1. GET TRANSACTION LIMIT</h3>
 <div class="sect3">
-<h4 id="_description_13">10.1.1. Description</h4>
+<h4 id="_description_16">11.1.1. Description</h4>
 <div class="paragraph"><p>This command returns the current cumulative amount limit and the number of transactions remaining</p></div>
 <div class="admonitionblock">
 <table><tr>
@@ -2927,7 +3448,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_coding_13">10.1.2. Coding</h4>
+<h4 id="_coding_16">11.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3031,9 +3552,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_set_transaction_limit">10.2. SET TRANSACTION LIMIT</h3>
+<h3 id="_set_transaction_limit">11.2. SET TRANSACTION LIMIT</h3>
 <div class="sect3">
-<h4 id="_description_14">10.2.1. Description</h4>
+<h4 id="_description_17">11.2.1. Description</h4>
 <div class="paragraph"><p>This command sets the current cumulative amount limit and the number of transactions remaining.</p></div>
 <div class="paragraph"><p>This command is protected by the HOTP server key. If the OTP is correct, the command is executed, the transaction limit is updated immediately and the OTP sequence counter is increased.</p></div>
 <div class="admonitionblock">
@@ -3046,7 +3567,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_coding_14">10.2.2. Coding</h4>
+<h4 id="_coding_17">11.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3156,24 +3677,16 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_developer_mode_apdus">11. Developer mode APDUs</h2>
+<h2 id="_developer_mode_apdus">12. Developer mode APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_import_private_key">11.1. IMPORT PRIVATE KEY</h3>
+<h3 id="_import_private_key">12.1. IMPORT PRIVATE KEY</h3>
 <div class="sect3">
-<h4 id="_description_15">11.1.1. Description</h4>
+<h4 id="_description_18">12.1.1. Description</h4>
 <div class="paragraph"><p>This command imports a regular private key, a BIP32 private key or a BIP32 seed and returns an encrypted version of the private key that this dongle can use for future operations.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_coding_15">11.1.2. Coding</h4>
+<h4 id="_coding_18">12.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3242,7 +3755,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">Encoded private key</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 </tbody>
@@ -3293,21 +3806,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_public_key">11.2. GET PUBLIC KEY</h3>
+<h3 id="_get_public_key">12.2. GET PUBLIC KEY</h3>
 <div class="sect3">
-<h4 id="_description_16">11.2.1. Description</h4>
-<div class="paragraph"><p>This command returns the public key or the extended public key for an encrypted private key</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
+<h4 id="_description_19">12.2.1. Description</h4>
+<div class="paragraph"><p>This command returns the public key or the extended public key for an encoded private key</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_16">11.2.2. Coding</h4>
+<h4 id="_coding_19">12.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3354,17 +3859,17 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Encrypted private key length</p></td>
+<td align="left" valign="top"><p class="table">Encoded private key length</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">Encoded private key</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p><em>Output data (non HD key)</em></p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -3378,6 +3883,38 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
+<td align="left" valign="top"><p class="table">Flag : 0x01</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Public key length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Public key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (HD key)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Flag : 0x02</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
 <td align="left" valign="top"><p class="table">Public key length</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
@@ -3386,18 +3923,26 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Base58 Extended Public Key length (if available, or 0x00)</p></td>
+<td align="left" valign="top"><p class="table">Chain code</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Depth</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Base58 Extended Public Key</p></td>
-<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">Parent fingerprint</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Child number (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="paragraph"><p><em>Availability</em></p></div>
-<div class="paragraph"><p>This function is always available following dongle setup in developer operation mode, and is protected by the user PIN.</p></div>
+<div class="paragraph"><p>This function is always available following dongle setup in developer operation mode, and is protected by the user PIN. It is always available in "masked seed" mode without presenting a PIN.</p></div>
 <div class="paragraph"><p><em>Status Words</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3441,22 +3986,15 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_derive_bip32_key">11.3. DERIVE BIP32 KEY</h3>
+<h3 id="_derive_bip32_key">12.3. DERIVE BIP32 KEY</h3>
 <div class="sect3">
-<h4 id="_description_17">11.3.1. Description</h4>
+<h4 id="_description_20">12.3.1. Description</h4>
 <div class="paragraph"><p>This command derives a BIP32 key to return a child key.</p></div>
 <div class="paragraph"><p>This command returns an error if operating on a non BIP32 key</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
+<div class="paragraph"><p>Both hardened and non hardened derivation modes are supported.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_17">11.3.2. Coding</h4>
+<h4 id="_coding_20">12.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3503,11 +4041,11 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Encrypted private key length</p></td>
+<td align="left" valign="top"><p class="table">Encoded private key length</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">Encoded private key</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
@@ -3531,14 +4069,14 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">Encoded private key</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="paragraph"><p><em>Availability</em></p></div>
-<div class="paragraph"><p>This function is always available following dongle setup in developer operation mode.</p></div>
+<div class="paragraph"><p>This function is always available following dongle setup in developer operation mode, or in "masked seed" mode.</p></div>
 <div class="paragraph"><p><em>Status Words</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3586,21 +4124,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ecdsa_sign_verify_immediate">11.4. ECDSA SIGN/VERIFY IMMEDIATE</h3>
+<h3 id="_ecdsa_sign_verify_immediate">12.4. ECDSA SIGN/VERIFY IMMEDIATE</h3>
 <div class="sect3">
-<h4 id="_description_18">11.4.1. Description</h4>
-<div class="paragraph"><p>This command is used to sign a given hash using an encrypted private key or verify a given signature using a public key</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">This function is not supported in this version</td>
-</tr></table>
-</div>
+<h4 id="_description_21">12.4.1. Description</h4>
+<div class="paragraph"><p>This command is used to sign a given hash using an encoded private key or verify a given signature using a public key</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_18">11.4.2. Coding</h4>
+<h4 id="_coding_21">12.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3628,7 +4158,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">00 : sign</p>
 <p class="table">                     80 : verify</p></td>
 <td align="left" valign="top"><p class="table">00 : sign with random K</p>
-<p class="table">                                            80 : sign with deterministic K, if enabled on setup</p></td>
+<p class="table">                                            80 : sign with deterministic K</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
@@ -3649,12 +4179,16 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Length of encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">Length of encoded private key</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">Encoded private key</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of hash to sign (up to 32 bytes)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Hash to sign</p></td>
@@ -3677,11 +4211,11 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Length of public key</p></td>
+<td align="left" valign="top"><p class="table">Length of uncompressed public key</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Public key</p></td>
+<td align="left" valign="top"><p class="table">Uncompressed Public key</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
@@ -3746,11 +4280,11 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">6982</p></td>
-<td align="left" valign="top"><p class="table">Security status not satisfied (running in untrusted mode)</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">6A80</p></td>
-<td align="left" valign="top"><p class="table">Invalid data (invalid key encryption)</p></td>
+<td align="left" valign="top"><p class="table">Invalid data (invalid key encryption, invalid signature)</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">6A82</p></td>
@@ -3780,16 +4314,16 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_test_apdus">12. Test APDUs</h2>
+<h2 id="_test_and_utility_apdus">13. Test and utility APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_get_random">12.1. GET RANDOM</h3>
+<h3 id="_get_random">13.1. GET RANDOM</h3>
 <div class="sect3">
-<h4 id="_description_19">12.1.1. Description</h4>
+<h4 id="_description_22">13.1.1. Description</h4>
 <div class="paragraph"><p>This command returns random bytes from the dongle hardware random number generator</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_19">12.1.2. Coding</h4>
+<h4 id="_coding_22">13.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3889,13 +4423,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_device_attestation">12.2. GET DEVICE ATTESTATION</h3>
+<h3 id="_get_device_attestation">13.2. GET DEVICE ATTESTATION</h3>
 <div class="sect3">
-<h4 id="_description_20">12.2.1. Description</h4>
-<div class="paragraph"><p>This command returns a signature of the given blob by the attestation key.</p></div>
+<h4 id="_description_23">13.2.1. Description</h4>
+<div class="paragraph"><p>This command returns a signature of the 3 bytes current firmware version concatenated to the given blob by the attestation key.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_20">12.2.2. Coding</h4>
+<h4 id="_coding_23">13.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3929,7 +4463,25 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p><em>Input data</em></p></div>
-<div class="paragraph"><p>None</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Blob to sign</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="paragraph"><p><em>Output data</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3952,7 +4504,19 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">04</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Signature</p></td>
+<td align="left" valign="top"><p class="table">Firmware major version</p></td>
+<td align="left" valign="top"><p class="table">02</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Firmware minor version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Firmware patch version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Signature of 4 previous bytes + blob</p></td>
 <td align="left" valign="top"><p class="table">variable</p></td>
 </tr>
 </tbody>
@@ -4002,20 +4566,305 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_get_firmware_version">13.3. GET FIRMWARE VERSION</h3>
+<div class="sect3">
+<h4 id="_description_24">13.3.1. Description</h4>
+<div class="paragraph"><p>This command returns the firmware version of the dongle</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_24">13.3.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">C4</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">05</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Internal public keys compression flag</p>
+<p class="table">                    0x00 : keys are not compressed</p>
+<p class="table">                    0x01 : keys are compressed</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Firmware major version</p></td>
+<td align="left" valign="top"><p class="table">02</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Firmware minor version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Firmware patch version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available.</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_compose_m_of_n_address">13.4. COMPOSE M OF N ADDRESS</h3>
+<div class="sect3">
+<h4 id="_description_25">13.4.1. Description</h4>
+<div class="paragraph"><p>This command is used to create and check on the fly a P2SH payment address to an M of N transaction, according to BIP 16 and BIP 11.</p></div>
+<div class="paragraph"><p>Each public key address is prompted to the user and validated by entering a PIN code as per the second factor mechanism.</p></div>
+<div class="paragraph"><p>After all public key addresses have been provided, the final address is typed to the user using the second factor mechanism.</p></div>
+<div class="paragraph"><p>Public keys can be provided in compressed or uncompressed format.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_25">13.4.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">C6</p></td>
+<td align="left" valign="top"><p class="table">00 : start composing a new address</p>
+<p class="table">                    80 : continue composing an address with a new public key</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (for a new address)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">M (number of signatures to provide to redeem the transaction, must be smaller than or equal to N)</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">N (total number of public keys provided, must be smaller than or equal to 3)</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Public key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (to keep on submitting a new key)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Authorization length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Authorization</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Optional Public key, ignored for the last one</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">User validation flag</p>
+<p class="table">      0x01 : user validation requested</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available following dongle setup (but is not usable in server mode)</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vendor_management_apdus">13. Vendor management APDUs</h2>
+<h2 id="_vendor_management_apdus">14. Vendor management APDUs</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>These APDUs are used for factory setup and firmware updates.</p></div>
 <div class="sect2">
-<h3 id="_factory_initialize_keys">13.1. FACTORY INITIALIZE KEYS</h3>
+<h3 id="_factory_initialize_keys">14.1. FACTORY INITIALIZE KEYS</h3>
 <div class="sect3">
-<h4 id="_description_21">13.1.1. Description</h4>
+<h4 id="_description_26">14.1.1. Description</h4>
 <div class="paragraph"><p>This command is used to derive the factory update and attestation storage keys from the shared rom key before issuance.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_21">13.1.2. Coding</h4>
+<h4 id="_coding_26">14.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4123,14 +4972,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_factory_initialize_attestation">13.2. FACTORY INITIALIZE ATTESTATION</h3>
+<h3 id="_factory_initialize_attestation">14.2. FACTORY INITIALIZE ATTESTATION</h3>
 <div class="sect3">
-<h4 id="_description_22">13.2.1. Description</h4>
+<h4 id="_description_27">14.2.1. Description</h4>
 <div class="paragraph"><p>This command sets up the attestation private key used to authenticate the device.</p></div>
 <div class="paragraph"><p>The dongle switches to post-issuance mode once this APDU is received and handled successfully.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_22">13.2.2. Coding</h4>
+<h4 id="_coding_27">14.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4238,13 +5087,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_firmware_update_id">13.3. GET FIRMWARE UPDATE ID</h3>
+<h3 id="_get_firmware_update_id">14.3. GET FIRMWARE UPDATE ID</h3>
 <div class="sect3">
-<h4 id="_description_23">13.3.1. Description</h4>
+<h4 id="_description_28">14.3.1. Description</h4>
 <div class="paragraph"><p>This command returns the firmware update ID of this dongle.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_23">13.3.2. Coding</h4>
+<h4 id="_coding_28">14.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4344,14 +5193,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_firmware_update">13.4. FIRMWARE UPDATE</h3>
+<h3 id="_firmware_update">14.4. FIRMWARE UPDATE</h3>
 <div class="sect3">
-<h4 id="_description_24">13.4.1. Description</h4>
+<h4 id="_description_29">14.4.1. Description</h4>
 <div class="paragraph"><p>This command is used to update the dongle firmware.</p></div>
 <div class="paragraph"><p>The dongle must not been set up to issue this command - if the dongle is set up, first wipe the user data by issuing the wrong user PIN 3 times.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_24">13.4.2. Coding</h4>
+<h4 id="_coding_29">14.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4454,12 +5303,12 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_data_structures">14. Data structures</h2>
+<h2 id="_data_structures">15. Data structures</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The format of the data structures is provided for interoperability and validation purposes. A typical user will not need to manipulate them directly.</p></div>
 <div class="sect2">
-<h3 id="_encoded_private_key_in_developer_mode">14.1. Encoded private key in developer mode</h3>
-<div class="paragraph"><p>An encoded private key is stored internally as follow, Triple DES encrypted by the developer mode wrapping key</p></div>
+<h3 id="_encoded_private_key_in_developer_mode">15.1. Encoded private key in developer mode</h3>
+<div class="paragraph"><p>An encoded private key is stored internally as follow. The private key component (S) and optional chain are triple DES encrypted by the developer mode wrapping key in CBC mode with a null IV (as S alone or S concatenated to the chain code)</p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -4477,19 +5326,14 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Private key flags</p>
+<td align="left" valign="top"><p class="table">Private key type</p>
 <p class="table">    0x01 : standard private key</p>
-<p class="table">    0x02 : BIP32 private key</p>
-<p class="table">    0x80 : testnet private key</p></td>
+<p class="table">    0x02 : BIP32 private key</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">CRC-16 of the structure computed after setting current bytes to 0000</p></td>
-<td align="left" valign="top"><p class="table">2</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Nonce</p></td>
-<td align="left" valign="top"><p class="table">3 or 4</p></td>
+<td align="left" valign="top"><p class="table">Version</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Private key component (S)</p></td>
@@ -4504,11 +5348,11 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">If BIP32, child number</p></td>
+<td align="left" valign="top"><p class="table">If BIP32, parent fingerprint</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">If BIP32, parent fingerprint</p></td>
+<td align="left" valign="top"><p class="table">If BIP32, child number (big endian)</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 </tbody>
@@ -4516,7 +5360,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encoded_trusted_input">14.2. Encoded trusted input</h3>
+<h3 id="_encoded_trusted_input">15.2. Encoded trusted input</h3>
 <div class="paragraph"><p>An encoded trusted input is stored internally as follow. The signature is the last block of a Triple DES CBC encryption of the previous data by the trusted input encryption key.</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4559,7 +5403,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_specific_data_transport_for_firmware_update_or_private_key_attestation_storage">14.3. Specific data transport for firmware update or private key attestation storage</h3>
+<h3 id="_specific_data_transport_for_firmware_update_or_private_key_attestation_storage">15.3. Specific data transport for firmware update or private key attestation storage</h3>
 <div class="paragraph"><p>Data sent for firmware update or private key attestation storage is formatted as follows, encrypted by either the diversified firmware update key or the diversified attestation storage key</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4601,7 +5445,7 @@ cellspacing="0" cellpadding="4">
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-03-22 07:59:22 CET
+Last updated 2014-05-13 23:30:16 CEST
 </div>
 </div>
 </body>
