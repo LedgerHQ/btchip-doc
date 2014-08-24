@@ -738,7 +738,7 @@ asciidoc.install(2);
 <h1>BTChip : Technical Specification</h1>
 <span id="author">BTChip</span><br />
 <span id="email"><tt>&lt;<a href="mailto:contact@btchip.com">contact@btchip.com</a>&gt;</tt></span><br />
-<span id="revdate">firmware version 1.4.6 - 15.06.14-1</span>
+<span id="revdate">firmware version 1.4.8 - 05.08.14-1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -746,7 +746,61 @@ asciidoc.install(2);
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_1_4_6_maison_du_bitcoin_hackathon_15th_of_june_2014">1. 1.4.6 ("Maison du Bitcoin" hackathon - 15th of June 2014)</h2>
+<h2 id="_1_4_8_greenaddress_release_05th_of_august_2014">1. 1.4.8 ("Greenaddress" release - 05th of August 2014)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+[enh] Allow 64 bytes seed in SETUP (BIP39 compliance)
+</p>
+</li>
+<li>
+<p>
+[enh] Return the BIP32 chain code along with the public key in GET WALLET PUBLIC KEY
+</p>
+</li>
+<li>
+<p>
+[enh] Add 0xB11E derivation path allowing a message signature without second factor and without power cycling, scan the low end word of derivation path components only
+</p>
+</li>
+<li>
+<p>
+[bug] Remove user entropy in SETUP (not used properly and no buffer space left to type it along with a 64 bytes seed)
+</p>
+</li>
+<li>
+<p>
+[bug] Allow 0 derivations in BIP32 derivation path
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_4_7_private_release_open_second_factor_23rd_of_july_2014">2. 1.4.7 (private release, open second factor - 23rd of July 2014)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+[enh] Add a mode to skip the second factor if consuming from P2SH inputs
+</p>
+</li>
+<li>
+<p>
+[enh] Allow derivation from an arbitrary BIP 32 path
+</p>
+</li>
+<li>
+<p>
+[enh] Return Loader ID in firmware information
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_4_6_maison_du_bitcoin_hackathon_15th_of_june_2014">3. 1.4.6 ("Maison du Bitcoin" hackathon - 15th of June 2014)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -763,7 +817,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_5_maison_du_bitcoin_meetup_4th_of_june_2014">2. 1.4.5 ("Maison du Bitcoin" meetup - 4th of June 2014)</h2>
+<h2 id="_1_4_5_maison_du_bitcoin_meetup_4th_of_june_2014">4. 1.4.5 ("Maison du Bitcoin" meetup - 4th of June 2014)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -785,7 +839,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_4_maison_du_bitcoin_opening_release_13th_of_may_2014">3. 1.4.4 ("Maison du Bitcoin" opening release - 13th of May 2014)</h2>
+<h2 id="_1_4_4_maison_du_bitcoin_opening_release_13th_of_may_2014">5. 1.4.4 ("Maison du Bitcoin" opening release - 13th of May 2014)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -827,7 +881,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_3_30c3_failed_release_p_20th_of_march_2014_paymium_meetup_release">4. 1.4.3 (30c3 failed release :p - 20th of March 2014 Paymium Meetup release)</h2>
+<h2 id="_1_4_3_30c3_failed_release_p_20th_of_march_2014_paymium_meetup_release">6. 1.4.3 (30c3 failed release :p - 20th of March 2014 Paymium Meetup release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -839,7 +893,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_2_bitcoin_2013_release">5. 1.4.2 (Bitcoin 2013 release)</h2>
+<h2 id="_1_4_2_bitcoin_2013_release">7. 1.4.2 (Bitcoin 2013 release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -851,7 +905,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_1_private_release">6. 1.4.1 (private release)</h2>
+<h2 id="_1_4_1_private_release">8. 1.4.1 (private release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -868,7 +922,7 @@ asciidoc.install(2);
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_4_0_29c3_release">7. 1.4.0 (29c3 release)</h2>
+<h2 id="_1_4_0_29c3_release">9. 1.4.0 (29c3 release)</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
@@ -880,13 +934,13 @@ Initial release
 </div>
 </div>
 <div class="sect1">
-<h2 id="_about">8. About</h2>
+<h2 id="_about">10. About</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>BTChip is a USB smartcard/dongle dedicated to secure bitcoin transactions. It performs all sensitive cryptographic operations related to a bitcoin transaction (key generation &amp; signature) onboard, and helps protect against malware in an untrusted environment by controlling the signed data.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_user_validation">9. User validation</h2>
+<h2 id="_user_validation">11. User validation</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>BTChip allows you to validate what you sign - i.e. check that you are paying the right amount to the right destination.</p></div>
 <div class="paragraph"><p>User validation is performed as follows :</p></div>
@@ -925,14 +979,14 @@ The user enters the PIN to confirm user validation
 </div>
 </div>
 <div class="sect1">
-<h2 id="_operation_modes">10. Operation modes</h2>
+<h2 id="_operation_modes">12. Operation modes</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Operation modes define which operations are allowed given the security environment the dongle is operating in.</p></div>
 <div class="paragraph"><p>Four operation modes are defined :</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-standard-wallet mode, managing an HD Wallet (BIP 32) with multiple accounts, supporting payments to a single address and enforcing user validation of the full transaction. This mode is intended for all bitcoin users.
+standard-wallet mode, managing an HD Wallet (BIP 32) with multiple accounts, supporting payments to a single address and enforcing user validation of the full transaction (unless the wallet is setup as a second factor for P2SH transactions). This mode is intended for all bitcoin users.
 </p>
 </li>
 <li>
@@ -953,8 +1007,8 @@ developer mode, managing BIP 32 or regular private keys and allowing to sign arb
 </ul></div>
 <div class="paragraph"><p>The dongle initally operates in standard-wallet mode when received (if this mode is enabled). The last chosen mode is restored when the dongle is powered on.</p></div>
 <div class="sect2">
-<h3 id="_standard_wallet_mode">10.1. standard-wallet mode</h3>
-<div class="paragraph"><p>Only a single point-to-point output (i.e. the standard script or a P2SH script) along with one change address on the external chain is authorized.</p></div>
+<h3 id="_standard_wallet_mode">12.1. standard-wallet mode</h3>
+<div class="paragraph"><p>Only a single point-to-point output (i.e. the standard script or a P2SH script) along with one change address is authorized.</p></div>
 <div class="paragraph"><p>All transaction inputs are controlled by the dongle.</p></div>
 <div class="paragraph"><p>The change address index is automatically handled by the dongle and increased for each transaction to prevent address reuse. The change address index is shared for all accounts.</p></div>
 <div class="paragraph"><p>The standard script is coded as</p></div>
@@ -969,11 +1023,6 @@ developer mode, managing BIP 32 or regular private keys and allowing to sign arb
 </div></div>
 <div class="paragraph"><p>Transaction are controlled by the user validation process. The following data will be prompted to the user :</p></div>
 <div class="ulist"><ul>
-<li>
-<p>
-Account index used
-</p>
-</li>
 <li>
 <p>
 Amount to pay
@@ -992,16 +1041,11 @@ Fees
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_relaxed_wallet_mode">10.2. relaxed-wallet mode</h3>
+<h3 id="_relaxed_wallet_mode">12.2. relaxed-wallet mode</h3>
 <div class="paragraph"><p>Arbitrary output is authorized</p></div>
 <div class="paragraph"><p>Transaction inputs are only controlled if they use a key actually belonging to a wallet account.</p></div>
 <div class="paragraph"><p>Transaction are controlled by the user validation process. The following data will be prompted to the user :</p></div>
 <div class="ulist"><ul>
-<li>
-<p>
-Account index used
-</p>
-</li>
 <li>
 <p>
 Amount to pay
@@ -1015,7 +1059,7 @@ A large warning that relaxed-wallet mode is in use
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_server_mode">10.3. server mode</h3>
+<h3 id="_server_mode">12.3. server mode</h3>
 <div class="paragraph"><p>Arbitrary output is authorized</p></div>
 <div class="paragraph"><p>Transaction inputs are only controlled if they use a key actually belonging to a wallet account.</p></div>
 <div class="paragraph"><p>Transactions are controlled given user parameters and automatically signed if accepted.</p></div>
@@ -1034,19 +1078,19 @@ A maximum number of consecutive transactions before the dongle is removed
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_developer_mode">10.4. developer mode</h3>
+<h3 id="_developer_mode">12.4. developer mode</h3>
 <div class="paragraph"><p>Arbitrary data can be signed in this mode</p></div>
 <div class="paragraph"><p>Keys used in developer mode cannot be used in a different mode</p></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lifecycle_management_apdus">11. Lifecycle management APDUs</h2>
+<h2 id="_lifecycle_management_apdus">13. Lifecycle management APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_setup_secure_screen">11.1. SETUP SECURE SCREEN</h3>
+<h3 id="_setup_secure_screen">13.1. SETUP SECURE SCREEN</h3>
 <div class="sect3">
-<h4 id="_description">11.1.1. Description</h4>
+<h4 id="_description">13.1.1. Description</h4>
 <div class="paragraph"><p>This command is used to operate the dongle in a standalone terminal - instead of typing back second factor data to the user, it will be returned encrypted by the provided 3DES-2 key, which should be stored as securely as possible by the standalone terminal.</p></div>
 <div class="paragraph"><p>This command is mostly intended for demonstration purposes, and is used by the Prismicide prototype.</p></div>
 <div class="admonitionblock">
@@ -1059,7 +1103,7 @@ A maximum number of consecutive transactions before the dongle is removed
 </div>
 </div>
 <div class="sect3">
-<h4 id="_coding">11.1.2. Coding</h4>
+<h4 id="_coding">13.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1159,9 +1203,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_setup">11.2. SETUP</h3>
+<h3 id="_setup">13.2. SETUP</h3>
 <div class="sect3">
-<h4 id="_description_2">11.2.1. Description</h4>
+<h4 id="_description_2">13.2.1. Description</h4>
 <div class="paragraph"><p>This command is used to setup the dongle when received, or pre-issuance when using the forward setup mode. It must be executed on a trusted computer as security critical data is exchanged.</p></div>
 <div class="paragraph"><p>For a new dongle not used as a backup device, a regular user will create a new random seed for a HD wallet and a PIN.</p></div>
 <div class="paragraph"><p>The PIN is used to perform a new payment transaction - it is sent as cleartext to the dongle and is not intended to be used as a malware protection method, only as an anti theft security.
@@ -1173,7 +1217,7 @@ When generating a new seed in regular setup mode, the dongle types it once on th
 <div class="paragraph"><p>It is recommended to store the BIP32 seed returned in the output of the SETUP command in a safe location for backup purposes - typically GPG encrypt it to yourself and store it on multiple storage devices / clouds.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_2">11.2.2. Coding</h4>
+<h4 id="_coding_2">13.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1233,7 +1277,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">Bitflag of features</p>
 <p class="table">    0x01 : use uncompressed public keys in addresses (otherwise compress them)</p>
 <p class="table">    0x02 : enable RFC 6979 deterministic signatures (otherwise use a random K)</p>
-<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p></td>
+<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p>
+<p class="table">    0x08 : skip second factor, allow relaxed inputs and arbitrary ouput scripts if consuming P2SH inputs in a transaction</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
@@ -1261,16 +1306,12 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Keymap encoding (details below)</p></td>
-<td align="left" valign="top"><p class="table">119</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">BIP32 Seed flag (0x00 to generate a new seed, 0x01 to restore a seed backup)</p></td>
+<td align="left" valign="top"><p class="table">BIP32 Seed size (0x00 to generate a new 64 bytes seed, size between 32 and 64 to restore a seed backup)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">User entropy if generating a new seed, BIP32 Seed if restoring a seed backup</p></td>
-<td align="left" valign="top"><p class="table">32</p></td>
+<td align="left" valign="top"><p class="table">BIP32 Seed if restoring a seed backup</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">3DES-2 key wrapping key length for developer mode (0x00 to generate a new key,
@@ -1309,7 +1350,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">Bitflag of features</p>
 <p class="table">    0x01 : use uncompressed public keys in addresses (otherwise compress them)</p>
 <p class="table">    0x02 : enable RFC 6979 deterministic signatures (otherwise use a random K)</p>
-<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p></td>
+<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p>
+<p class="table">    0x08 : skip second factor if consuming only P2SH inputs in a transaction</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
@@ -1337,16 +1379,12 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Keymap encoding (details below)</p></td>
-<td align="left" valign="top"><p class="table">119</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">BIP32 Seed flag (0x00 to generate a new seed, 0x01 to restore a seed backup)</p></td>
+<td align="left" valign="top"><p class="table">BIP32 Seed size (0x00 to generate a new 64 bytes seed, 64 to restore a seed backup)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">User entropy if generating a new seed, BIP32 Seed if restoring a seed backup</p></td>
-<td align="left" valign="top"><p class="table">32</p></td>
+<td align="left" valign="top"><p class="table">BIP32 Seed if restoring a seed backup</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">0x00 or 0x10 if restoring a seed backup</p></td>
@@ -1382,7 +1420,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">Bitflag of features</p>
 <p class="table">    0x01 : use uncompressed public keys in addresses (otherwise compress them)</p>
 <p class="table">    0x02 : enable RFC 6979 deterministic signatures (otherwise use a random K)</p>
-<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p></td>
+<p class="table">    0x04 : authorize all signature hashtypes (otherwise only authorize SIGHASH_ALL)</p>
+<p class="table">    0x08 : skip second factor if consuming only P2SH inputs in a transaction</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
@@ -1408,10 +1447,6 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">BIP32 Seed flag (0x00 to generate a new seed)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">User entropy if generating a new seed</p></td>
-<td align="left" valign="top"><p class="table">32</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">3DES-2 key wrapping key length for developer mode (0x00 to generate a new key)</p></td>
@@ -1547,7 +1582,7 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p>If generating a new seed, the dongle generates a 32 bytes random from its hardware Random Number Generator and performs an exclusive OR between this number and the provided user entropy to create the seed.</p></div>
+<div class="paragraph"><p>If generating a new seed, the dongle generates a 64 bytes random number from its hardware Random Number Generator</p></div>
 <div class="paragraph"><p>A keymap encoding is a set of Keyboard HID Usage IDs mapping the keyboard layout of the computer on which the user validation is performed. It can be updated later using the SET KEYMAP command.</p></div>
 <div class="paragraph" id="KeymapEncoding"><p>Keymap encoding is coded as follows</p></div>
 <div class="tableblock">
@@ -1669,9 +1704,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verify_pin">11.3. VERIFY PIN</h3>
+<h3 id="_verify_pin">13.3. VERIFY PIN</h3>
 <div class="sect3">
-<h4 id="_description_3">11.3.1. Description</h4>
+<h4 id="_description_3">13.3.1. Description</h4>
 <div class="paragraph"><p>This command is used to unlock the dongle using the PIN provided during setup.</p></div>
 <div class="paragraph"><p>If forward setup mode was used, the seed will be typed to the user on the first PIN entry and signature operations are enabled if a keymap was set. Otherwise the command will be denied.</p></div>
 <div class="paragraph"><p>The dongle must be physically reset after each invalid PIN to issue a new command.</p></div>
@@ -1679,7 +1714,7 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>If the wipe PIN is entered instead of the user PIN, the device seed is replaced by a random one and the device keeps operating.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_3">11.3.2. Coding</h4>
+<h4 id="_coding_3">13.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1798,14 +1833,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_operation_mode">11.4. GET OPERATION MODE</h3>
+<h3 id="_get_operation_mode">13.4. GET OPERATION MODE</h3>
 <div class="sect3">
-<h4 id="_description_4">11.4.1. Description</h4>
+<h4 id="_description_4">13.4.1. Description</h4>
 <div class="paragraph"><p>This command returns the current operation mode used by the dongle</p></div>
 <div class="paragraph"><p>The forward setup mask is present if a forward setup mode was performed and the seed has not been redeemed by the end user yet.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_4">11.4.2. Coding</h4>
+<h4 id="_coding_4">13.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -1910,15 +1945,15 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_set_operation_mode">11.5. SET OPERATION MODE</h3>
+<h3 id="_set_operation_mode">13.5. SET OPERATION MODE</h3>
 <div class="sect3">
-<h4 id="_description_5">11.5.1. Description</h4>
+<h4 id="_description_5">13.5.1. Description</h4>
 <div class="paragraph"><p>This command sets the operation mode that will be used by the dongle after the next power up.</p></div>
 <div class="paragraph"><p>The dongle must be physically reset following this command.</p></div>
 <div class="paragraph"><p>If the requested mode has been disabled on setup, an error will be returned.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_5">11.5.2. Coding</h4>
+<h4 id="_coding_5">13.5.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2022,14 +2057,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_set_keymap">11.6. SET KEYMAP</h3>
+<h3 id="_set_keymap">13.6. SET KEYMAP</h3>
 <div class="sect3">
-<h4 id="_description_6">11.6.1. Description</h4>
-<div class="paragraph"><p>This command modifies the keymap used during the dongle setup.</p></div>
+<h4 id="_description_6">13.6.1. Description</h4>
+<div class="paragraph"><p>This command sets or modifies the keymap following dongle setup.</p></div>
 <div class="paragraph"><p>The keymap is encoded as in <a href="#KeymapEncoding">[KeymapEncoding]</a></p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_6">11.6.2. Coding</h4>
+<h4 id="_coding_6">13.6.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2137,15 +2172,15 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_set_communication_protocol">11.7. SET COMMUNICATION PROTOCOL</h3>
+<h3 id="_set_communication_protocol">13.7. SET COMMUNICATION PROTOCOL</h3>
 <div class="sect3">
-<h4 id="_description_7">11.7.1. Description</h4>
+<h4 id="_description_7">13.7.1. Description</h4>
 <div class="paragraph"><p>This command sets the transport protocol used by the dongle on the next power up</p></div>
 <div class="paragraph"><p>The USB identifier used in WinUSB mode is 2581:1b7c</p></div>
 <div class="paragraph"><p>The USB identifier used in Generic HID mode is 2581:2b7c</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_7">11.7.2. Coding</h4>
+<h4 id="_coding_7">13.7.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2228,9 +2263,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_secure_screen">11.8. GET SECURE SCREEN</h3>
+<h3 id="_get_secure_screen">13.8. GET SECURE SCREEN</h3>
 <div class="sect3">
-<h4 id="_description_8">11.8.1. Description</h4>
+<h4 id="_description_8">13.8.1. Description</h4>
 <div class="paragraph"><p>This command is used to return the second factor encrypted by the secure screen 3DES-2 key if it was set up previously.</p></div>
 <div class="paragraph"><p>This command is mostly intended for demonstration purposes, and is used by the Prismicide prototype.</p></div>
 <div class="admonitionblock">
@@ -2243,7 +2278,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_coding_8">11.8.2. Coding</h4>
+<h4 id="_coding_8">13.8.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2345,17 +2380,16 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_wallet_usage_apdus">12. Wallet usage APDUs</h2>
+<h2 id="_wallet_usage_apdus">14. Wallet usage APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_get_wallet_public_key">12.1. GET WALLET PUBLIC KEY</h3>
+<h3 id="_get_wallet_public_key">14.1. GET WALLET PUBLIC KEY</h3>
 <div class="sect3">
-<h4 id="_description_9">12.1.1. Description</h4>
-<div class="paragraph"><p>This command returns the public key and Base58 encoded address for the given account and chain index.</p></div>
-<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
+<h4 id="_description_9">14.1.1. Description</h4>
+<div class="paragraph"><p>This command returns the public key and Base58 encoded address for the given BIP 32 path.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_9">12.1.2. Coding</h4>
+<h4 id="_coding_9">14.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2380,10 +2414,9 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">E0</p></td>
 <td align="left" valign="top"><p class="table">40</p></td>
-<td align="left" valign="top"><p class="table">01 : use the external chain</p>
-<p class="table">                    02 : use the internal chain</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">08</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
 <td align="left" valign="top"><p class="table">variable</p></td>
 </tr>
 </tbody>
@@ -2403,11 +2436,19 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Account (big endian)</p></td>
+<td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 10)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">First derivation index (big endian)</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Chain index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">&#8230;</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Last derivation index (big endian)</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 </tbody>
@@ -2441,6 +2482,10 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">Base58 encoded bitcoin address</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">BIP32 Chain code</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
 </tr>
 </tbody>
 </table>
@@ -2490,14 +2535,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_trusted_input">12.2. GET TRUSTED INPUT</h3>
+<h3 id="_get_trusted_input">14.2. GET TRUSTED INPUT</h3>
 <div class="sect3">
-<h4 id="_description_10">12.2.1. Description</h4>
+<h4 id="_description_10">14.2.1. Description</h4>
 <div class="paragraph"><p>This command is used to extract a Trusted Input (encrypted transaction hash, output index, output amount) from a transaction.</p></div>
 <div class="paragraph"><p>The transaction data to be provided should be encoded using bitcoin standard raw transaction encoding. Scripts can be sent over several APDUs. Other individual transaction elements split over different APDUs will be rejected. 64 bits varints are rejected.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_10">12.2.2. Coding</h4>
+<h4 id="_coding_10">14.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2654,9 +2699,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_transaction_input_start">12.3. UNTRUSTED HASH TRANSACTION INPUT START</h3>
+<h3 id="_untrusted_hash_transaction_input_start">14.3. UNTRUSTED HASH TRANSACTION INPUT START</h3>
 <div class="sect3">
-<h4 id="_description_11">12.3.1. Description</h4>
+<h4 id="_description_11">14.3.1. Description</h4>
 <div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for a new transaction.</p></div>
 <div class="paragraph"><p>This transaction can be verified by the user and using transaction rules according to the current dongle operation mode.</p></div>
 <div class="paragraph"><p>If a new transaction is started, a VERIFY PIN command shall have been issued previously to unlock the dongle at least once following the dongle power up</p></div>
@@ -2664,17 +2709,17 @@ cellspacing="0" cellpadding="4">
 <div class="ulist"><ul>
 <li>
 <p>
-A 1 byte flag is added before each input in the transaction - if the input will be signed in the transaction (not part of a partial transaction), this flag is set to 0x01
+A 1 byte flag is added before each input in the transaction - if the input is passed as a Trusted Input, this flag is set to 0x01 - otherwise, it is set to 0x00. Non Trusted Inputs can be used in relaxed mode for inputs that are not signed, or for all P2SH inputs when the dongle has been setup to skip the second factor when dealing with P2SH inputs.
 </p>
 </li>
 <li>
 <p>
-Each input outpoint for an input that will be signed in the transaction is to be replaced by the Trusted Input length (1 byte) and the Trusted Input data
+When using a Trusted Input, each input outpoint is replaced by the Trusted Input length (1 byte) and the Trusted Input data
 </p>
 </li>
 <li>
 <p>
-The input scripts shall be prepared by the host for the transaction signing process as per bitcoin rules : the current input script being signed shall be the previous output script, and other input script shall be null
+The input scripts shall be prepared by the host for the transaction signing process as per bitcoin rules : the current input script being signed shall be the previous output script (or the redeeming script when consuming a P2SH output), and other input script shall be null.
 </p>
 </li>
 <li>
@@ -2690,7 +2735,7 @@ Scripts can be sent over several APDUs. Other individual transaction elements sp
 </ul></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_11">12.3.2. Coding</h4>
+<h4 id="_coding_11">14.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2804,9 +2849,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_transaction_input_finalize">12.4. UNTRUSTED HASH TRANSACTION INPUT FINALIZE</h3>
+<h3 id="_untrusted_hash_transaction_input_finalize">14.4. UNTRUSTED HASH TRANSACTION INPUT FINALIZE</h3>
 <div class="sect3">
-<h4 id="_description_12">12.4.1. Description</h4>
+<h4 id="_description_12">14.4.1. Description</h4>
 <div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for the transaction outputs</p></div>
 <div class="paragraph"><p>This command is rejected if all inputs advertised at the beginning of the transaction have not been processed first.</p></div>
 <div class="paragraph"><p>The generated script will be the standard script coded as below given the address for a non script address</p></div>
@@ -2821,10 +2866,9 @@ cellspacing="0" cellpadding="4">
 </div></div>
 <div class="paragraph"><p>The output amount, fees and change will be validated by the user in wallet or relaxed wallet modes.</p></div>
 <div class="paragraph"><p>The generated transaction output data contains in pre-serialized form the number of outputs (target &amp; optionally change) and each output data</p></div>
-<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_12">12.4.2. Coding</h4>
+<h4 id="_coding_12">14.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -2851,8 +2895,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">46</p></td>
 <td align="left" valign="top"><p class="table">01 : output address provided as version byte + binary hash160</p>
 <p class="table">                    02 : output address provided as base58 string</p></td>
-<td align="left" valign="top"><p class="table">01 : use the external chain for change (non standard, added for wallet compliance)</p>
-<p class="table">                        02 : use the internal chain for change (standard)</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
@@ -2889,11 +2932,19 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">8</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Account of the internal change address to use (big endian)</p></td>
+<td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 10)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">First derivation index for the internal change address (big endian)</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Chain index of the internal change address to use (big endian)</p></td>
+<td align="left" valign="top"><p class="table">&#8230;</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Last derivation index for the internal change address (big endian)</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 </tbody>
@@ -2986,15 +3037,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_sign">12.5. UNTRUSTED HASH SIGN</h3>
+<h3 id="_untrusted_hash_sign">14.5. UNTRUSTED HASH SIGN</h3>
 <div class="sect3">
-<h4 id="_description_13">12.5.1. Description</h4>
+<h4 id="_description_13">14.5.1. Description</h4>
 <div class="paragraph"><p>This command is used to sign a given secure hash using a private key (after re-hashing it following the standard Bitcoin signing process) to finalize a transaction input signing process.</p></div>
 <div class="paragraph"><p>This command will be rejected if the transaction signing state is not consistent or if a user validation is required and the provided user validation code is not correct.</p></div>
-<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_13">12.5.2. Coding</h4>
+<h4 id="_coding_13">14.5.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3041,18 +3091,20 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Account of the private key to use (big endian)</p></td>
-<td align="left" valign="top"><p class="table">4</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Chain index of the private key to use (big endian)</p></td>
-<td align="left" valign="top"><p class="table">4</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Chain to use</p>
-<p class="table">    0x01 : external chain</p>
-<p class="table">    0x02 : internal chain</p></td>
+<td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 10)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">First derivation index for the private key to use(big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&#8230;</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Last derivation index for the private key to use (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">User validation code length (or 0x00)</p></td>
@@ -3150,14 +3202,15 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untrusted_hash_transaction_input_finalize_full">12.6. UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL</h3>
+<h3 id="_untrusted_hash_transaction_input_finalize_full">14.6. UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL</h3>
 <div class="sect3">
-<h4 id="_description_14">12.6.1. Description</h4>
+<h4 id="_description_14">14.6.1. Description</h4>
 <div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for the transaction outputs</p></div>
 <div class="paragraph"><p>This command is rejected if all inputs advertised at the beginning of the transaction have not been processed first.</p></div>
+<div class="paragraph"><p>Output data can be split arbitrarily.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_14">12.6.2. Coding</h4>
+<h4 id="_coding_14">14.6.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3231,7 +3284,9 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p><em>Output data (not last block)</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data (last block)</em></p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -3254,7 +3309,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p><em>Availability</em></p></div>
-<div class="paragraph"><p>This function is always available following dongle setup in relaxed wallet and server operation modes.</p></div>
+<div class="paragraph"><p>This function is available following dongle setup in standard wallet mode when the dongle has been setup to skip the second factor when dealing with P2SH inputs and the current transaction is consuming P2SH inputs, or always available following dongle setup in relaxed wallet and server operation modes.</p></div>
 <div class="paragraph"><p><em>Status Words</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3310,9 +3365,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sign_message">12.7. SIGN MESSAGE</h3>
+<h3 id="_sign_message">14.7. SIGN MESSAGE</h3>
 <div class="sect3">
-<h4 id="_description_15">12.7.1. Description</h4>
+<h4 id="_description_15">14.7.1. Description</h4>
 <div class="paragraph"><p>This command is used to sign a maximum 140 bytes long text message using a private key. The message must be ASCII printable (each byte of the message must be between 0x20 and 0x7e, both included)</p></div>
 <div class="paragraph"><p>The message is provided to the dongle, which types it along with a single usage transaction PIN when it&#8217;s power cycled.</p></div>
 <div class="paragraph"><p>The transaction PIN is then sent back to this command to retrieve the message signature</p></div>
@@ -3347,11 +3402,10 @@ Return the Base64 encoded version of j || r || s
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>Hardened derivation is used for the account. Non hardened derivation is used for the chain and index.</p></div>
-<div class="paragraph"><p>Chain index 0xB11D is reserved for immediate message signing without confirmation (typically used for BitID). The dongle must be powercycled after signing with this account.</p></div>
+<div class="paragraph"><p>If the low end word of one component of the BIP 32 derivation path includes 0xB11D or 0xB11E the message is immediately signed without confirmation (typically used for BitID). The dongle must be powercycled after signing with a derivation path containing 0xB11D.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_15">12.7.2. Coding</h4>
+<h4 id="_coding_15">14.7.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3399,18 +3453,20 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Account of the private key to use (big endian)</p></td>
-<td align="left" valign="top"><p class="table">4</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Chain index of the private key to use (big endian)</p></td>
-<td align="left" valign="top"><p class="table">4</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Chain to use</p>
-<p class="table">    0x01 : external chain</p>
-<p class="table">    0x02 : internal chain</p></td>
+<td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 10)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">First derivation index of the private key to use (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&#8230;</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Last derivation index of the private key to use (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Message length (max 140)</p></td>
@@ -3548,12 +3604,12 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_server_mode_apdus">13. Server mode APDUs</h2>
+<h2 id="_server_mode_apdus">15. Server mode APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_get_transaction_limit">13.1. GET TRANSACTION LIMIT</h3>
+<h3 id="_get_transaction_limit">15.1. GET TRANSACTION LIMIT</h3>
 <div class="sect3">
-<h4 id="_description_16">13.1.1. Description</h4>
+<h4 id="_description_16">15.1.1. Description</h4>
 <div class="paragraph"><p>This command returns the current cumulative amount limit and the number of transactions remaining</p></div>
 <div class="admonitionblock">
 <table><tr>
@@ -3565,7 +3621,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_coding_16">13.1.2. Coding</h4>
+<h4 id="_coding_16">15.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3669,9 +3725,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_set_transaction_limit">13.2. SET TRANSACTION LIMIT</h3>
+<h3 id="_set_transaction_limit">15.2. SET TRANSACTION LIMIT</h3>
 <div class="sect3">
-<h4 id="_description_17">13.2.1. Description</h4>
+<h4 id="_description_17">15.2.1. Description</h4>
 <div class="paragraph"><p>This command sets the current cumulative amount limit and the number of transactions remaining.</p></div>
 <div class="paragraph"><p>This command is protected by the HOTP server key. If the OTP is correct, the command is executed, the transaction limit is updated immediately and the OTP sequence counter is increased.</p></div>
 <div class="admonitionblock">
@@ -3684,7 +3740,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_coding_17">13.2.2. Coding</h4>
+<h4 id="_coding_17">15.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3794,16 +3850,16 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_developer_mode_apdus">14. Developer mode APDUs</h2>
+<h2 id="_developer_mode_apdus">16. Developer mode APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_import_private_key">14.1. IMPORT PRIVATE KEY</h3>
+<h3 id="_import_private_key">16.1. IMPORT PRIVATE KEY</h3>
 <div class="sect3">
-<h4 id="_description_18">14.1.1. Description</h4>
+<h4 id="_description_18">16.1.1. Description</h4>
 <div class="paragraph"><p>This command imports a regular private key, a BIP32 private key or a BIP32 seed and returns an encrypted version of the private key that this dongle can use for future operations.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_18">14.1.2. Coding</h4>
+<h4 id="_coding_18">16.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -3923,13 +3979,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_public_key">14.2. GET PUBLIC KEY</h3>
+<h3 id="_get_public_key">16.2. GET PUBLIC KEY</h3>
 <div class="sect3">
-<h4 id="_description_19">14.2.1. Description</h4>
+<h4 id="_description_19">16.2.1. Description</h4>
 <div class="paragraph"><p>This command returns the public key or the extended public key for an encoded private key</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_19">14.2.2. Coding</h4>
+<h4 id="_coding_19">16.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4103,15 +4159,15 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_derive_bip32_key">14.3. DERIVE BIP32 KEY</h3>
+<h3 id="_derive_bip32_key">16.3. DERIVE BIP32 KEY</h3>
 <div class="sect3">
-<h4 id="_description_20">14.3.1. Description</h4>
+<h4 id="_description_20">16.3.1. Description</h4>
 <div class="paragraph"><p>This command derives a BIP32 key to return a child key.</p></div>
 <div class="paragraph"><p>This command returns an error if operating on a non BIP32 key</p></div>
 <div class="paragraph"><p>Both hardened and non hardened derivation modes are supported.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_20">14.3.2. Coding</h4>
+<h4 id="_coding_20">16.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4241,13 +4297,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ecdsa_sign_verify_immediate">14.4. ECDSA SIGN/VERIFY IMMEDIATE</h3>
+<h3 id="_ecdsa_sign_verify_immediate">16.4. ECDSA SIGN/VERIFY IMMEDIATE</h3>
 <div class="sect3">
-<h4 id="_description_21">14.4.1. Description</h4>
+<h4 id="_description_21">16.4.1. Description</h4>
 <div class="paragraph"><p>This command is used to sign a given hash using an encoded private key or verify a given signature using a public key</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_21">14.4.2. Coding</h4>
+<h4 id="_coding_21">16.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4431,16 +4487,16 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_test_and_utility_apdus">15. Test and utility APDUs</h2>
+<h2 id="_test_and_utility_apdus">17. Test and utility APDUs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_get_random">15.1. GET RANDOM</h3>
+<h3 id="_get_random">17.1. GET RANDOM</h3>
 <div class="sect3">
-<h4 id="_description_22">15.1.1. Description</h4>
+<h4 id="_description_22">17.1.1. Description</h4>
 <div class="paragraph"><p>This command returns random bytes from the dongle hardware random number generator</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_22">15.1.2. Coding</h4>
+<h4 id="_coding_22">17.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4540,13 +4596,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_device_attestation">15.2. GET DEVICE ATTESTATION</h3>
+<h3 id="_get_device_attestation">17.2. GET DEVICE ATTESTATION</h3>
 <div class="sect3">
-<h4 id="_description_23">15.2.1. Description</h4>
-<div class="paragraph"><p>This command returns a signature of the 3 bytes current firmware version concatenated to the given blob by the attestation key.</p></div>
+<h4 id="_description_23">17.2.1. Description</h4>
+<div class="paragraph"><p>This command returns a signature of the 6 bytes current firmware version concatenated to the given blob by the attestation key.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_23">15.2.2. Coding</h4>
+<h4 id="_coding_23">17.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4633,7 +4689,15 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Signature of 4 previous bytes + blob</p></td>
+<td align="left" valign="top"><p class="table">Loader ID major version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Loader ID minor version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Signature of 6 previous bytes + blob</p></td>
 <td align="left" valign="top"><p class="table">variable</p></td>
 </tr>
 </tbody>
@@ -4684,13 +4748,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_firmware_version">15.3. GET FIRMWARE VERSION</h3>
+<h3 id="_get_firmware_version">17.3. GET FIRMWARE VERSION</h3>
 <div class="sect3">
-<h4 id="_description_24">15.3.1. Description</h4>
+<h4 id="_description_24">17.3.1. Description</h4>
 <div class="paragraph"><p>This command returns the firmware version of the dongle</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_24">15.3.2. Coding</h4>
+<h4 id="_coding_24">17.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4718,7 +4782,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">05</p></td>
+<td align="left" valign="top"><p class="table">07</p></td>
 </tr>
 </tbody>
 </table>
@@ -4754,6 +4818,14 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Firmware patch version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Loader ID major version</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Loader ID minor version</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 </tbody>
@@ -4804,16 +4876,16 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_compose_m_of_n_address">15.4. COMPOSE M OF N ADDRESS</h3>
+<h3 id="_compose_m_of_n_address">17.4. COMPOSE M OF N ADDRESS</h3>
 <div class="sect3">
-<h4 id="_description_25">15.4.1. Description</h4>
+<h4 id="_description_25">17.4.1. Description</h4>
 <div class="paragraph"><p>This command is used to create and check on the fly a P2SH payment address to an M of N transaction, according to BIP 16 and BIP 11.</p></div>
 <div class="paragraph"><p>Each public key address is prompted to the user and validated by entering a PIN code as per the second factor mechanism.</p></div>
 <div class="paragraph"><p>After all public key addresses have been provided, the final address is typed to the user using the second factor mechanism.</p></div>
 <div class="paragraph"><p>Public keys can be provided in compressed or uncompressed format.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_25">15.4.2. Coding</h4>
+<h4 id="_coding_25">17.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -4969,9 +5041,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_point_of_sale_seed">15.5. GET POINT OF SALE SEED</h3>
+<h3 id="_get_point_of_sale_seed">17.5. GET POINT OF SALE SEED</h3>
 <div class="sect3">
-<h4 id="_description_26">15.5.1. Description</h4>
+<h4 id="_description_26">17.5.1. Description</h4>
 <div class="paragraph"><p>This command is used to retrieve the seed backup if the dongle was set up in Point Of Sale mode.</p></div>
 <div class="paragraph"><p>The seed backup is split into 2 components :</p></div>
 <div class="ulist"><ul>
@@ -4990,7 +5062,7 @@ The encrypted seed
 <div class="paragraph"><p>The dongle must be powercycled after processing this command.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_26">15.5.2. Coding</h4>
+<h4 id="_coding_26">17.5.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5061,7 +5133,7 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Encrypted seed</p></td>
-<td align="left" valign="top"><p class="table">32</p></td>
+<td align="left" valign="top"><p class="table">64</p></td>
 </tr>
 </tbody>
 </table>
@@ -5113,17 +5185,17 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vendor_management_apdus">16. Vendor management APDUs</h2>
+<h2 id="_vendor_management_apdus">18. Vendor management APDUs</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>These APDUs are used for factory setup and firmware updates.</p></div>
 <div class="sect2">
-<h3 id="_factory_initialize_keys">16.1. FACTORY INITIALIZE KEYS</h3>
+<h3 id="_factory_initialize_keys">18.1. FACTORY INITIALIZE KEYS</h3>
 <div class="sect3">
-<h4 id="_description_27">16.1.1. Description</h4>
+<h4 id="_description_27">18.1.1. Description</h4>
 <div class="paragraph"><p>This command is used to derive the factory update and attestation storage keys from the shared rom key before issuance.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_27">16.1.2. Coding</h4>
+<h4 id="_coding_27">18.1.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5231,14 +5303,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_factory_initialize_attestation">16.2. FACTORY INITIALIZE ATTESTATION</h3>
+<h3 id="_factory_initialize_attestation">18.2. FACTORY INITIALIZE ATTESTATION</h3>
 <div class="sect3">
-<h4 id="_description_28">16.2.1. Description</h4>
+<h4 id="_description_28">18.2.1. Description</h4>
 <div class="paragraph"><p>This command sets up the attestation private key used to authenticate the device.</p></div>
 <div class="paragraph"><p>The dongle switches to post-issuance mode once this APDU is received and handled successfully.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_28">16.2.2. Coding</h4>
+<h4 id="_coding_28">18.2.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5346,13 +5418,13 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_firmware_update_id">16.3. GET FIRMWARE UPDATE ID</h3>
+<h3 id="_get_firmware_update_id">18.3. GET FIRMWARE UPDATE ID</h3>
 <div class="sect3">
-<h4 id="_description_29">16.3.1. Description</h4>
+<h4 id="_description_29">18.3.1. Description</h4>
 <div class="paragraph"><p>This command returns the firmware update ID of this dongle.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_29">16.3.2. Coding</h4>
+<h4 id="_coding_29">18.3.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5452,14 +5524,14 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_firmware_update">16.4. FIRMWARE UPDATE</h3>
+<h3 id="_firmware_update">18.4. FIRMWARE UPDATE</h3>
 <div class="sect3">
-<h4 id="_description_30">16.4.1. Description</h4>
+<h4 id="_description_30">18.4.1. Description</h4>
 <div class="paragraph"><p>This command is used to update the dongle firmware.</p></div>
 <div class="paragraph"><p>The dongle must not been set up to issue this command - if the dongle is set up, first wipe the user data by issuing the wrong user PIN 3 times.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_coding_30">16.4.2. Coding</h4>
+<h4 id="_coding_30">18.4.2. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5562,11 +5634,11 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_data_structures">17. Data structures</h2>
+<h2 id="_data_structures">19. Data structures</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The format of the data structures is provided for interoperability and validation purposes. A typical user will not need to manipulate them directly.</p></div>
 <div class="sect2">
-<h3 id="_encoded_private_key_in_developer_mode">17.1. Encoded private key in developer mode</h3>
+<h3 id="_encoded_private_key_in_developer_mode">19.1. Encoded private key in developer mode</h3>
 <div class="paragraph"><p>An encoded private key is stored internally as follow. The private key component (S) and optional chain are triple DES encrypted by the developer mode wrapping key in CBC mode with a null IV (as S alone or S concatenated to the chain code)</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5619,7 +5691,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encoded_trusted_input">17.2. Encoded trusted input</h3>
+<h3 id="_encoded_trusted_input">19.2. Encoded trusted input</h3>
 <div class="paragraph"><p>An encoded trusted input is stored internally as follow. The signature is the last block of a Triple DES CBC encryption of the previous data by the trusted input encryption key.</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5634,12 +5706,17 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Magic version (<strong>31</strong>)</p></td>
+<td align="left" valign="top"><p class="table">Magic version (<strong>32</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Flags</p>
+<p class="table">    RFU</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Nonce</p></td>
-<td align="left" valign="top"><p class="table">3</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Associated transaction hash</p></td>
@@ -5662,7 +5739,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_specific_data_transport_for_firmware_update_or_private_key_attestation_storage">17.3. Specific data transport for firmware update or private key attestation storage</h3>
+<h3 id="_specific_data_transport_for_firmware_update_or_private_key_attestation_storage">19.3. Specific data transport for firmware update or private key attestation storage</h3>
 <div class="paragraph"><p>Data sent for firmware update or private key attestation storage is formatted as follows, encrypted by either the diversified firmware update key or the diversified attestation storage key</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -5704,7 +5781,7 @@ cellspacing="0" cellpadding="4">
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-18 23:32:47 CEST
+Last updated 2014-08-24 21:39:20 CEST
 </div>
 </div>
 </body>
