@@ -1,0 +1,3095 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>BTChip : Technical Specification</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>BTChip : Technical Specification</h1>
+<span id="author">BTChip</span><br />
+<span id="email"><tt>&lt;<a href="mailto:contact@btchip.com">contact@btchip.com</a>&gt;</tt></span><br />
+<span id="revdate">firmware version 1.4.2</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_1_4_2_bitcoin_2013_release">1. 1.4.2 (Bitcoin 2013 release)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+[enh] New security rules &amp; operation modes
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_4_1_private_release">2. 1.4.1 (private release)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+[enh] ECC operations speed-up
+</p>
+</li>
+<li>
+<p>
+[bug] Private key are now paired to their curve parameters (cheers Jix :p)
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_4_0_29c3_release">3. 1.4.0 (29c3 release)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Initial release
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about">4. About</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>BTChip is a USB smartcard/dongle dedicated to secure bitcoin transactions. It performs all sensitive cryptographic operations related to a bitcoin transaction (key generation &amp; signature) onboard, and helps protect against malware in an untrusted environment by controlling the signed data.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operation_modes">5. Operation modes</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Operation modes define which operations are allowed given the security environment the dongle is operating in.</p></div>
+<div class="paragraph"><p>Two operation modes are defined, from the less restrictive to the more restrictive :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Fully trusted : This mode should be reserved to known trusted environments. Arbitrary data can be signed, and no control is performed over bitcoin transactions.
+</p>
+</li>
+<li>
+<p>
+Moderately trusted : This mode should be reserved for moderately trusted environments. Bitcoin transactions are automatically signed according to preset user parameters.
+</p>
+</li>
+<li>
+<p>
+Untrusted : This mode is the default mode when using standard operation parameters. Each bitcoin transaction has to be authorized.
+</p>
+</li>
+<li>
+<p>
+Untrusted with transaction signing disabled : This mode should be enabled to only generate addresses on a server or offline wallet.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The persistent operation mode will be restored when the dongle is powered on.</p></div>
+<div class="paragraph"><p>The user is always authorized to move from an operation mode to a more restrictive operation mode. However an authentication is required to move to a less restrictive operation mode.</p></div>
+<div class="sect2">
+<h3 id="_fully_trusted_operation_mode">5.1. Fully trusted operation mode</h3>
+<div class="paragraph"><p>All dongle functionalities are enabled in trusted mode. Arbitrary data can be signed by the dongle.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_moderately_trusted_operation_mode">5.2. Moderately trusted operation mode</h3>
+<div class="paragraph"><p>Only a single point-to-point output (i.e. the standard script) with one dongle generated change address is authorized.</p></div>
+<div class="paragraph"><p>The standard script is coded as</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>OP_DUP OP_HASH160 [pubKeyHash] OP_EQUALVERIFY OP_CHECKSIG</tt></pre>
+</div></div>
+<div class="paragraph"><p>Transactions are controlled given user parameters and automatically signed if accepted.</p></div>
+<div class="paragraph"><p>Transactions can be controlled on a combination of the following parameters :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+A maximum output amount
+</p>
+</li>
+<li>
+<p>
+A maximum fees amount
+</p>
+</li>
+<li>
+<p>
+A maximum change amount
+</p>
+</li>
+<li>
+<p>
+A maximum number of consecutive transactions before the dongle is removed
+</p>
+</li>
+<li>
+<p>
+Only authorizing an output address that has been registered previously
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_untrusted_operation_mode">5.3. Untrusted operation mode</h3>
+<div class="paragraph"><p>Only a single point-to-point output (i.e. the standard script) with one dongle generated change address is authorized.</p></div>
+<div class="paragraph"><p>The standard script is coded as</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>OP_DUP OP_HASH160 [pubKeyHash] OP_EQUALVERIFY OP_CHECKSIG</tt></pre>
+</div></div>
+<div class="paragraph"><p>Each transaction has to be authenticated by the user given :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+the output address
+</p>
+</li>
+<li>
+<p>
+the output amount
+</p>
+</li>
+<li>
+<p>
+the fees amount
+</p>
+</li>
+<li>
+<p>
+the change private key address generated by the dongle
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>A cryptographic hash is computed over the transaction data by an external system displaying the authorization data for user validation (smartphone, remote server &#8230;) and sent back to the dongle to authenticate the transaction.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_untrusted_operation_mode_with_transaction_signing_disabled">5.4. Untrusted operation mode with transaction signing disabled</h3>
+<div class="paragraph"><p>In this mode, only the GENERATE KEYPAIR OR IMPORT PRIVATE KEY function is enabled, and all cleartext key import functionalities are disabled for this command (the only authorized import is option 08 : diversification of a given value)</p></div>
+</div>
+<div class="sect2">
+<h3 id="_disabled_dongle_functionalities">5.5. Disabled dongle functionalities</h3>
+<div class="paragraph"><p>When not operating in fully trusted mode, the following operations are disabled :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Authentication with a GlobalPlatform keyset other than 0x10 or 0xFE is disabled - to prevent accidental data leaks in an untrusted environment
+</p>
+</li>
+<li>
+<p>
+CREATE FILE - to prevent a malware from creating arbitrary transaction control rules if an accidental key leak occured by authenticating with keyset 0x10 in an untrusted environment
+</p>
+</li>
+<li>
+<p>
+PUT KEY
+</p>
+</li>
+<li>
+<p>
+SYSTEM ADMINISTRATION - RESET if not authenticated with keyset 0x10
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_keyset_types">6. Additional keyset types</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following keyset types are added - only the first key component of the keysets is used for all types.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+20 : Private key encryption - these keys are used to encrypt private keys
+</p>
+</li>
+<li>
+<p>
+21 : Context exchange encryption - these keys are used to transfer contexts between dongles to make the transaction parsing mechanism stateless if desired
+</p>
+</li>
+<li>
+<p>
+22 : Authorized address encryption - these keys are used to encrypt authorized addresses
+</p>
+</li>
+<li>
+<p>
+23 : Trusted Input encryption - these keys are used to encrypt trusted inputs (previous output + amount
+     extracted from a transaction)
+</p>
+</li>
+<li>
+<p>
+24 : Transaction authorization signature - these keys are used to sign transaction authorizations
+</p>
+</li>
+<li>
+<p>
+25 : Trusted Secure Channel - commands sent over a Secure Channel opened by such keyset will be executed
+   in trusted mode, if at least command confidentiality (CMAC) is activated for this Secure Channel.
+</p>
+</li>
+<li>
+<p>
+26 : Private key signature - these keys are used to compute a signature of the generated private key
+</p>
+</li>
+<li>
+<p>
+27 : Mode signature - these keys are used to compute a signature of the operation mode returned by the dongle
+</p>
+</li>
+<li>
+<p>
+28 : Private key diversification - these keys are used to derive given values to generate a private key component
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The first Key Access parameters byte is coded as per the other keys, and the second byte is not used.</p></div>
+<div class="paragraph"><p>The following key types are safe to share with an external device for the process integrity validation - other keys should never be shared with an external device, other than a backup dongle :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Private key signature : these keys will be used to check that a generated private key has not been held by a malware application (ransomware attack).
+</p>
+</li>
+<li>
+<p>
+Transaction authorization signature : these keys will be used to authorize individual transactions.
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">the Private key encryption key are the only keys that <strong>must</strong> be backed up properly by the user to be able to regenerate another dongle or retrieve private keys if the dongle is lost or destroyed.</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unique_internal_keypair">7. Unique Internal Keypair</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_description">7.1. Description</h3>
+<div class="paragraph"><p>It is possible to store a unique keypair into the dongle, never revealing the private key.</p></div>
+<div class="paragraph"><p>This private key cannot be backed up, and is mostly intended to exchange bitcoins between remote peers with no previously established trust relationship and be sure that the sender is not able to spend the coins sent to the receiver.</p></div>
+<div class="paragraph"><p>In this typical scenario, Sarah wants to send some coins to Rachel :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Sarah gets a blank BTChip dongle
+</p>
+</li>
+<li>
+<p>
+Sarah asks Rachel to pick a password, and generate the Unique Internal Keypair, protected by Rachel&#8217;s password.
+</p>
+</li>
+<li>
+<p>
+Sarah provides the Public Key of the Unique Internal Keypair to Rachel
+</p>
+</li>
+<li>
+<p>
+Sarah sends the blank BTChip dongle to Rachel via snail mail
+</p>
+</li>
+<li>
+<p>
+While the dongle travels around, Sarah, Boris, Brenda and Bob send coins to Rachel&#8217;s Public Key
+</p>
+</li>
+<li>
+<p>
+Rachel receives the dongle, unlocks the Unique Internal Keypair with the previously chosen password, and can spend the coins.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_technical_details">7.2. Technical details</h3>
+<div class="paragraph"><p>The private key is stored into the encrypted non readable file /uik</p></div>
+<div class="paragraph"><p>Before generating the Unique Internal Keypair, keyset 0xFD must be present with a GlobalPlatform Authentication Role.</p></div>
+<div class="paragraph"><p>Keyset 0xFD is automatically deleted on the first successful authentication.</p></div>
+<div class="paragraph"><p>The private component of the Unique Internal Keypair cannot be used while keyset 0xFD exists.</p></div>
+<div class="paragraph"><p>In all APIs the private key of the Unique Internal Keypair is referenced as an encrypted private key component beginning with "UIK" (55494B)</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_files">8. Additional files</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_elliptic_curve_parameters">8.1. Elliptic curve parameters</h3>
+<div class="paragraph"><p>Elliptic curve parameters are stored in transparent files in 3F00/CE15 DF, using the following format</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Size of A component</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">A component</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Size of B component</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">B component</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Size of Field component</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Field component</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Size of G component</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">G component</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Size of R component</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">R component</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Size of K component</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">K component</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>The secp256k1 bitcoin curve is provided in the 0xb1c0 file, and cannot be updated by the user.</p></div>
+<div class="paragraph"><p>Access conditions for the 0xb1c0 file are :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+READ         ALWays
+</p>
+</li>
+<li>
+<p>
+UPDATE       NEVer
+</p>
+</li>
+<li>
+<p>
+DELETE       NEVer
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_operation_parameters">8.2. Operation parameters</h3>
+<div class="paragraph"><p>Operation parameters are defined in the 0xb101 file located in 0x3f00. They define the basic functionalities of the dongle</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Current operation mode</p>
+<p class="table">                            0x01 : trusted</p>
+<p class="table">                            0x02 : moderately trusted</p>
+<p class="table">                            0x04 : untrusted (default)</p>
+<p class="table">                            0x08 : untrusted with transaction signing disabled</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Enforcement flag</p>
+<p class="table">      0x01 : enforce maximum number of consecutive transactions</p>
+<p class="table">      0x02 : enforce maximum cumulative output</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Maximum number of consecutive transactions in the same
+                       session</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Maximum cumulative output amount in the same session</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>Access conditions for this file are :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+READ         0x01 (default user keyset)
+</p>
+</li>
+<li>
+<p>
+UPDATE       0x01 (default user keyset)
+</p>
+</li>
+<li>
+<p>
+DELETE       0xFE (administrative keyset)
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_transaction_control">8.3. Transaction control</h3>
+<div class="paragraph"><p>Transaction control parameters are stored in transparent files in 3F00/0D11 DF, and are used to set generic rules for controlling transactions in moderately trusted mode, using the following format</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Flags</p>
+<p class="table">                       0x01 : only accept pre-authorized output addresses</p>
+<p class="table">                       0x02 : check maximum output amount</p>
+<p class="table">                       0x04 : check maximum fee amount</p>
+<p class="table">                       0x08 : check maximum change amount</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Maximum output amount, big endian</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Minimum sequence index (apply to all inputs), big endian</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Maximum sequence index (apply to all inputs), big endian</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Minimum lock time</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Maximum lock time</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Bitmask of authorized SigHash values</p>
+<p class="table">                            0x01 : SIGHASH_ALL authorized</p>
+<p class="table">                            0x02 : SIGHASH_NONE authorized</p>
+<p class="table">                            0x04 : SIGHASH_SINGLE authorized</p>
+<p class="table">                            0x08 : mask SIGHASH_ANYONECANPAY authorized</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Maximum fee amount, big endian</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Maximum change amount, big endian</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>A default configuration file for payments up to 1 BTC is provided in the 0x0001 file, and cannot be updated by the user, using the following values :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Flags : 0x0E (check maximum output amount, maximum fee amount, maximum charge amount) in moderately trusted mode
+</p>
+</li>
+<li>
+<p>
+Maximum output amount : 00 10 5E 5F 00 00 00 00 (1.000000000)
+</p>
+</li>
+<li>
+<p>
+Maximum fee amount    : 00 10 5E 5F 00 00 00 00 (1.000000000)
+</p>
+</li>
+<li>
+<p>
+Maximum change amount : 00 10 5E 5F 00 00 00 00 (1.000000000)
+</p>
+</li>
+<li>
+<p>
+Minimum sequence index : FF FF FF FF
+</p>
+</li>
+<li>
+<p>
+Maximum sequence index : FF FF FF FF
+</p>
+</li>
+<li>
+<p>
+Minimum lock time : 00 00 00 00
+</p>
+</li>
+<li>
+<p>
+Maximum lock time : 00 00 00 00
+</p>
+</li>
+<li>
+<p>
+Bitmask of authorized SigHash values : 0x01
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Access conditions for the 0x0001 file are :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+READ         ALWays
+</p>
+</li>
+<li>
+<p>
+UPDATE       0xFE (administrative keyset)
+</p>
+</li>
+<li>
+<p>
+DELETE       0xFE (administrative keyset)
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_apdus_available_for_all_modes">9. APDUs available for all modes</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_set_operation_mode">9.1. SET OPERATION MODE</h3>
+<div class="sect3">
+<h4 id="_description_2">9.1.1. Description</h4>
+<div class="paragraph"><p>This command is used to set the operation mode of the dongle.</p></div>
+<div class="paragraph"><p>Going to a more restrictive operation mode is always authorized.</p></div>
+<div class="paragraph"><p>If going to a less restrictive operation mode, the user shall be authenticated by the GlobalPlatform user key 0x10.</p></div>
+<div class="paragraph"><p>The operation mode signature can be used by an external device to make sure that the mode switch is legitimate - it is computed as the last block of a 3DES-CBC encryption of the returned operation mode concatenated with the nonce.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding">9.1.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">24</p></td>
+<td align="left" valign="top"><p class="table">target mode or 00 to query the current operation mode</p>
+<p class="table">                    01 : trusted mode</p>
+<p class="table">                    02 : moderately trusted mode</p>
+<p class="table">                    04 : untrusted mode</p>
+<p class="table">                    08 : untrusted mode with transaction signing disabled</p></td>
+<td align="left" valign="top"><p class="table">00 : persistent change</p>
+<p class="table">                                          80 : non persistent change done until powered down (only if going to a less restrictive mode)</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+<td align="left" valign="top"><p class="table">10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the keyset used for operation mode signature</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Current operation mode</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Nonce</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Operation mode signature</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generate_keypair_or_import_private_key">9.2. GENERATE KEYPAIR OR IMPORT PRIVATE KEY</h3>
+<div class="sect3">
+<h4 id="_description_3">9.2.1. Description</h4>
+<div class="paragraph"><p>This command is used to generate a keypair using the given curve parameters or import a given private key.</p></div>
+<div class="paragraph"><p>The file containing the curve parameter shall be selected before calling this command when generating a keypair.</p></div>
+<div class="paragraph"><p>The private part of the keypair will be encrypted by the Private key encryption key version passed as input parameter.
+This key must be accessible when the function is called</p></div>
+<div class="paragraph"><p>The private key signature can be used by an external device to make sure that a generated key is legitimate - it is computed as the last block of a 3DES-CBC encryption of the encrypted private key component concatenated with the derivation data.</p></div>
+<div class="paragraph"><p>If generating the Unique Internal Keypair</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The Unique Internal Keypair must not exist
+</p>
+</li>
+<li>
+<p>
+Keyset 0xFD must be present and set to GlobalPlatform Authentication Role
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_2">9.2.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">20</p></td>
+<td align="left" valign="top"><p class="table">00 : generate mode</p>
+<p class="table">                     01 : provide Authorized Address for public key (not authorized when preparing a
+                          key in non trusted mode)</p>
+<p class="table">                     02 : on prepare mode, import private key in base-58 Wallet Import Format</p>
+<p class="table">                     04 : on prepare mode, import private key as a SHA-256 hash of the given data</p>
+<p class="table">                     08 : on prepare mode, 3DES-CBC encrypt the given binary value with the key passed
+                     in P2 and use this value as private key. The key passed in P2 must have the
+                     Bitcoin Key Derivation role</p>
+<p class="table">                     10 : generate the Unique Internal Keypair</p>
+<p class="table">                     80 : prepare mode, default import format being a binary key</p></td>
+<td align="left" valign="top"><p class="table">00 or keyset version used to derive the provided data if using prepare mode with option 08</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the private key encryption keyset to use</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the private key signature keyset to use</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Keypair flags</p>
+<p class="table">                          01 : key can only be used in trusted mode</p>
+<p class="table">                          02 : key is always reused as change address</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">File ID of the curve to use to generate this key</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">If requesting an Authorized Address, Authorized Address Encryption keyset version to use</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">if requesting an Authorized Address, Bitcoin address version</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">If importing a key, private key to encode / derivation data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of public key component (<strong>41</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Public key component (W)</p></td>
+<td align="left" valign="top"><p class="table">41</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of encrypted private key component (<strong>28</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Encrypted private key component (encrypted S)</p></td>
+<td align="left" valign="top"><p class="table">28</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Derivation data used (or 00&#8230;00)</p></td>
+<td align="left" valign="top"><p class="table">20</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Private key signature</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">If generating an Authorized Address, length of the
+               Authorized Address (<strong>20</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">If generating an Authorized Address, Authorized address</p></td>
+<td align="left" valign="top"><p class="table">28</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_public_key">9.3. GET PUBLIC KEY</h3>
+<div class="sect3">
+<h4 id="_description_4">9.3.1. Description</h4>
+<div class="paragraph"><p>This command is used to retrieve the public given given an encrypted private key.</p></div>
+<div class="paragraph"><p>The private part of the keypair should be be encrypted by the Private key encryption key version passed as input parameter.
+This key must be accessible when the function is called</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_3">9.3.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">26</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the private key encryption to use</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Public key component (W)</p></td>
+<td align="left" valign="top"><p class="table">41</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_trusted_operation_mode_apdus">10. Trusted operation mode APDUs</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_authorize_address">10.1. AUTHORIZE ADDRESS</h3>
+<div class="sect3">
+<h4 id="_description_5">10.1.1. Description</h4>
+<div class="paragraph"><p>This command is used to encode an address authorization.</p></div>
+<div class="paragraph"><p>The address is an hash160 (ripemd160 of a sha256) of an ECDSA public key, encoded using base58 or provided as binary data.</p></div>
+<div class="paragraph"><p>The authorized address will be encrypted by the Authorized address encryption version passed as input parameter.</p></div>
+<div class="paragraph"><p>This key must be accessible when the function is called</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_4">10.1.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">22</p></td>
+<td align="left" valign="top"><p class="table">00 : address provided as a base58 string (if supported)</p>
+<p class="table">                     80 : address provided as a version byte + hash160</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the Authorized address encryption key to use</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Address size</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Address to authorize</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Authorized address</p></td>
+<td align="left" valign="top"><p class="table">28</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ecdsa_sign_verify_immediate">10.2. ECDSA SIGN/VERIFY IMMEDIATE</h3>
+<div class="sect3">
+<h4 id="_description_6">10.2.1. Description</h4>
+<div class="paragraph"><p>This command is used to sign a given hash using a private key or verify a given signature using a public key</p></div>
+<div class="paragraph"><p>The private key shall be encrypted by the Private key encryption key version passed as input parameter.
+This key must be accessible when the function is called</p></div>
+<div class="paragraph"><p>If a signature is required in untrusted mode, this command will exit with status word 0x6982</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_5">10.2.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">40</p></td>
+<td align="left" valign="top"><p class="table">00 : sign</p>
+<p class="table">                     80 : verify</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (sign mode)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the private key encryption to use</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Hash to sign</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (verify mode)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">File ID of the curve to use to verify the signature</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of public key</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Public key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of hash to verify (up to 32 bytes)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Hash to verify  </p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Signature</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (sign mode)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Signed hash, as ASN-1 encoded R &amp; S components</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (verify mode)</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (running in untrusted mode)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A80</p></td>
+<td align="left" valign="top"><p class="table">Invalid data (invalid key encryption)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_apdus_available_for_moderately_trusted_and_untrusted_modes">11. APDUs available for moderately trusted and untrusted modes</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_get_trusted_input">11.1. GET TRUSTED INPUT</h3>
+<div class="sect3">
+<h4 id="_description_7">11.1.1. Description</h4>
+<div class="paragraph"><p>This command is used to extract a Trusted Input (encrypted transaction hash, output index, output amount) from a transaction.</p></div>
+<div class="paragraph"><p>The transaction data to be provided should be encoded using bitcoin standard raw transaction encoding. Scripts
+can be sent over several APDUs. Other individual transaction elements split over different APDUs will be rejected. 64 bits varints are rejected.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_6">11.1.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">42</p></td>
+<td align="left" valign="top"><p class="table">00 : first transaction data block</p>
+<p class="table">                    80 : subsequent transaction data block</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (first block)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Keyset version used for Trusted Input encryption</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Input index to lookup</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (next block)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (non last block)</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data (last block)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Trusted Input</p></td>
+<td align="left" valign="top"><p class="table">38</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A80</p></td>
+<td align="left" valign="top"><p class="table">Invalid data (parameters or transaction data)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_untrusted_hash_transaction_input_start">11.2. UNTRUSTED HASH TRANSACTION INPUT START</h3>
+<div class="sect3">
+<h4 id="_description_8">11.2.1. Description</h4>
+<div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for a new transaction, controlled by the given transaction control file.</p></div>
+<div class="paragraph"><p>The transaction data to be provided should be encoded using bitcoin standard raw transaction encoded as follows :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Each input outpoint is to be replaced by its associated Trusted Input encryption key (1 byte), the Trusted Input length (1 byte) and the Trusted Input data
+</p>
+</li>
+<li>
+<p>
+The input scripts shall be prepared by the host for the transaction signing process as per bitcoin rules : the current input script being signed shall be the previous output script, and other input script shall be null
+</p>
+</li>
+<li>
+<p>
+The encoded transaction data shall be provided up to (and not including) the number of outputs.
+</p>
+</li>
+<li>
+<p>
+Scripts can be sent over several APDUs. Other individual transaction elements split over different APDUs will be rejected. 64 bits varints are rejected.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_7">11.2.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">44</p></td>
+<td align="left" valign="top"><p class="table">00 : first transaction data block</p>
+<p class="table">                    80 : subsequent transaction data block</p></td>
+<td align="left" valign="top"><p class="table">00 : start signing a new transaction
+                         80 : continue signing another input of the current transaction</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (first transaction data block for a new transaction)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">File ID of the transaction control file to use for generic rules regarding this
+                 transaction, or 0000 (forbidden for moderately trusted mode)</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (other transaction data block)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A80</p></td>
+<td align="left" valign="top"><p class="table">Invalid data (parameters or transaction data)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_untrusted_hash_transaction_input_finalize">11.3. UNTRUSTED HASH TRANSACTION INPUT FINALIZE</h3>
+<div class="sect3">
+<h4 id="_description_9">11.3.1. Description</h4>
+<div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for the transaction outputs</p></div>
+<div class="paragraph"><p>This command is rejected if all inputs advertised at the beginning of the transaction have not been processed first.</p></div>
+<div class="paragraph"><p>The generated script will be the standard script coded as below given the address.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>OP_DUP OP_HASH160 [pubKeyHash] OP_EQUALVERIFY OP_CHECKSIG</tt></pre>
+</div></div>
+<div class="paragraph"><p>The output amount, fees and change will be optionally enforced in moderately trusted mode given the transaction control file used for this transaction</p></div>
+<div class="paragraph"><p>In untrusted mode, an authorization will be computed for the transaction using the output address, the output amount, the fees, change address and a hash of the transaction not including input script data.</p></div>
+<div class="paragraph"><p>The generated transaction output data contains in pre-serialized form the number of outputs (target &amp; optionally change) and each output data</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_8">11.3.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">46</p></td>
+<td align="left" valign="top"><p class="table">01 : output address provided as binary hash160</p>
+<p class="table">                    02 : output address provided as base58 string (if supported)</p>
+<p class="table">                    03 : output address provided as authorized address</p></td>
+<td align="left" valign="top"><p class="table">Authorized Address encryption keyset version used if providing the output address
+                        as an Authorized Address</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (first input processed for a given transaction)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the private key encryption to use for the Change Address</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of the Output Address</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Output Address (base58, hash160 or Authorized Address)</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of the Change Address Private Key</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Change Address (as an encrypted private key)</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Amount (big endian)</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Fees (big endian)</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (other input for the same transaction)</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data (first input processed for a given transaction)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Generated transaction output data length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Generated transaction output data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction Authorization Data length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction Authorization Data if necessary</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (other input for the same transaction)</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Transaction Authorization data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction hash not including input script data</p></td>
+<td align="left" valign="top"><p class="table">20</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction Nonce</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Output address as hash160</p></td>
+<td align="left" valign="top"><p class="table">14</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Output amount</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Fees amount</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Change amount</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Change Address encryption keyset version</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of the Change Address Private Key</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Change Address (as an encrypted private key)</p></td>
+<td align="left" valign="top"><p class="table">28</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Change public key hash160</p></td>
+<td align="left" valign="top"><p class="table">14</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A80</p></td>
+<td align="left" valign="top"><p class="table">Invalid data (parameters, transaction state or rules not validated)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_untrusted_hash_sign">11.4. UNTRUSTED HASH SIGN</h3>
+<div class="sect3">
+<h4 id="_description_10">11.4.1. Description</h4>
+<div class="paragraph"><p>This command is used to sign a given secure hash using a private key (after re-hashing it following the standard Bitcoin signing process) to finalize a transaction input signing process.</p></div>
+<div class="paragraph"><p>This command will be rejected if the transaction signing state is not consistent or if a Transaction Authorization is required and the provided Transaction Authorization signature is not correct.</p></div>
+<div class="paragraph"><p>The private key shall be encrypted by the Private key encryption key version passed as input parameter.
+This key must be accessible when the function is called</p></div>
+<div class="paragraph"><p>The locktime and SigHash value will be enforced given the transaction control file used for this transaction</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_9">11.4.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">E0</p></td>
+<td align="left" valign="top"><p class="table">48</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the private key encryption keyset to use</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Encrypted private key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Version of the Transaction Authorization signature keyset to use (or 00)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Length of the Transaction Authorization Signature (or 00)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Transaction Authorization Signature if provided</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Lock Time (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">SigHashType</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Signed hash, as ASN-1 encoded R &amp; S components</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">SigHashType</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Licensing</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+<div class="paragraph"><p><em>Status Words</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>SW</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6581</p></td>
+<td align="left" valign="top"><p class="table">Memory problem</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6700</p></td>
+<td align="left" valign="top"><p class="table">Incorrect length</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6982</p></td>
+<td align="left" valign="top"><p class="table">Security status not satisfied (Bitcoin dongle is locked or invalid access rights)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6A82</p></td>
+<td align="left" valign="top"><p class="table">File not found</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6B00</p></td>
+<td align="left" valign="top"><p class="table">Incorrect parameter P1 or P2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6Fxx</p></td>
+<td align="left" valign="top"><p class="table">Technical problem (00 : no diagnostic given)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9000</p></td>
+<td align="left" valign="top"><p class="table">Normal ending of the command</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9804</p></td>
+<td align="left" valign="top"><p class="table">Access condition not fulfilled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transaction_context_import_export">11.5. TRANSACTION CONTEXT IMPORT/EXPORT</h3>
+<div class="paragraph"><p>RFU.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_structures">12. Data structures</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The format of the data structures is provided for interoperability and validation purposes. A typical user will not need to manipulate them directly.</p></div>
+<div class="sect2">
+<h3 id="_encoded_private_key_for_a_256_bits_curve">12.1. Encoded private key for a 256 bits curve</h3>
+<div class="paragraph"><p>An encoded private key is stored internally as follow, Triple DES encrypted by the private key encryption key</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Magic version (<strong>01</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Private key flags (RFU)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">ID of the file in 3F00/CE15 containing the curve parameters</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">CRC-16 of the structure computed after setting current bytes to 0000</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Nonce</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Private key component (S)</p></td>
+<td align="left" valign="top"><p class="table">20</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_encoded_authorized_address">12.2. Encoded authorized address</h3>
+<div class="paragraph"><p>An encoded authorized address is stored internally as follow. The signature is the last block of a Triple DES CBC encryption of the previous data by the encoded authorized address encryption key.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Magic version (<strong>21</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Public key flags (RFU)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">RFU (<strong>00</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Nonce</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Bitcoin address version</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Bitcoin address as a hash160</p></td>
+<td align="left" valign="top"><p class="table">14</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Signature</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_encoded_trusted_input">12.3. Encoded trusted input</h3>
+<div class="paragraph"><p>An encoded trusted input is stored internally as follow. The signature is the last block of a Triple DES CBC encryption of the previous data by the trusted input encryption key.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Magic version (<strong>31</strong>)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Nonce</p></td>
+<td align="left" valign="top"><p class="table">3</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Associated transaction hash</p></td>
+<td align="left" valign="top"><p class="table">20</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Index in associated transaction</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Associated amount</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Signature</p></td>
+<td align="left" valign="top"><p class="table">8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transaction_context_for_dongle_exchange">12.4. Transaction context for dongle exchange</h3>
+<div class="paragraph"><p>RFU.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-11-16 23:32:49 CET
+</div>
+</div>
+</body>
+</html>
