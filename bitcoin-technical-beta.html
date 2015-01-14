@@ -761,6 +761,11 @@ asciidoc.install(2);
 </li>
 <li>
 <p>
+[bev] Add an option to use the second factor permanently on SET OPERATION MODE (Ledger Wallet mode)
+</p>
+</li>
+<li>
+<p>
 [enh] Rename SET KEYMAP to SET KEYBOARD CONFIGURATION and configure typing parameters
 </p>
 </li>
@@ -781,7 +786,7 @@ asciidoc.install(2);
 </li>
 <li>
 <p>
-[enh] Personal BIP 70 certificates : STORE TRUST ROOT BIP 70, CREATE CERTIFICATE BIP 70, CREATE PAYMENT REQUEST BIP 70, PROCESS CERTIFICATE BIP 70, PARSE PAYMENT REQUEST BIP70, UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL BIP 70, FACTORY INITIALIZE BIP 70 TRUST ROOT
+[enh] Personal BIP 70 certificates : STORE TRUST ROOT BIP 70, CREATE CERTIFICATE BIP 70, CREATE PAYMENT REQUEST BIP 70, PROCESS CERTIFICATE BIP 70, PARSE PAYMENT REQUEST BIP 70, UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL BIP 70, FACTORY INITIALIZE BIP 70 TRUST ROOT
 </p>
 </li>
 </ul></div>
@@ -1139,7 +1144,7 @@ The user enters the PIN to confirm user validation
 </div>
 <div class="sect2">
 <h3 id="_security_card_user_validation">17.2. Security Card User validation</h3>
-<div class="paragraph"><p>This user validation mode has been introduced in version 1.4.9 and provide an option to validate a transaction destination using a printed card for easier validation.</p></div>
+<div class="paragraph"><p>This user validation mode has been introduced in version 1.4.9 and provides an option to validate a transaction destination using a printed card for easier validation.</p></div>
 <div class="paragraph"><p>User validation is performed as follows :</p></div>
 <div class="ulist"><ul>
 <li>
@@ -1157,7 +1162,7 @@ The user types the result matching the random indexes in the printed card to con
 </div>
 <div class="sect2">
 <h3 id="_secure_screen_user_validation">17.3. Secure Screen User validation</h3>
-<div class="paragraph"><p>This user validation mode has been introduced in version LW1-1.0 and provide an option to validate a transaction destination and amount using a paired device with a screen</p></div>
+<div class="paragraph"><p>This user validation mode has been introduced in version LW1-1.0 and provides an option to validate a transaction destination and amount using a paired device with a screen</p></div>
 <div class="paragraph"><p>User validation is performed as follows :</p></div>
 <div class="ulist"><ul>
 <li>
@@ -1176,6 +1181,45 @@ The remote device generates a signed version of the nonce which is sent to the L
 </p>
 </li>
 </ul></div>
+</div>
+<div class="sect2">
+<h3 id="_personal_bip_70_certificates_user_validation">17.4. Personal BIP 70 Certificates User validation</h3>
+<div class="paragraph"><p>This user validation mode has been introduced in version LW-1.0 and provides an option to validate a transaction destination and amount against a BIP 70 request.</p></div>
+<div class="paragraph"><p>The process is initiated as follows when performed between two Ledger Wallet users :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+A dedicated identity is created by the sender using the CREATE CERTIFICATE BIP 70 APDU, bound to a BIP 32 derivation path. This certificate is signed by a root certificate set at personalization time using the FACTORY INITIALIZE BIP 70 TRUST ROOT APDU or at runtime using the STORE TRUST ROOT BIP 70 APDU. All Ledger Wallet dongles are factory initialized with a shared root certificate in slot 0.
+</p>
+</li>
+<li>
+<p>
+This identity is shared with the receiver, which validates it using its provided checksum and accepts it using the PROCESS CERTIFICATE BIP 70 APDU.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>A transaction is processed as follows :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The sender creates a BIP 70 Payment Request associated to an identity and a BIP 32 derivation path related to this identity using the CREATE PAYMENT REQUEST BIP 70 APDU.
+</p>
+</li>
+<li>
+<p>
+The payment request is processed by the receiver using the PARSE PAYMENT REQUEST BIP 70 APDU and a transaction is formatted using the regular methods, then finalized with the UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL BIP 70 APDU.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>External consumers of this BIP 70 Payment Request can choose to trust its destination request if signed by the Ledger Wallet shared root certificate.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Currently the certificates and BIP 70 Payment Request are generated over secp256k1, which is not compatible with BitcoinJ</td>
+</tr></table>
+</div>
 </div>
 </div>
 </div>
@@ -2373,7 +2417,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">E0</p></td>
 <td align="left" valign="top"><p class="table">26</p></td>
 <td align="left" valign="top"><p class="table">00 : do not enable the alternate second factor (only valid if switching to standard operation mode)</p>
-<p class="table">01 : enable the alternate second factor (only valid if switching to standard operation mode)</p></td>
+<p class="table">01 : enable the alternate second factor until the dongle is power cycled (only valid if switching to standard operation mode)</p>
+<p class="table">02 : enable the alternate second factor permanently, until the seed is erased (only valid if switching to standard operation mode)</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
@@ -3792,14 +3837,9 @@ cellspacing="0" cellpadding="4">
 <div class="sect2">
 <h3 id="_create_payment_request_bip_70">21.3. CREATE PAYMENT REQUEST BIP 70</h3>
 <div class="paragraph"><p>This command is used to create a new signed PaymentRequest with the provided certificate, validating that the address belongs to the user by checking that the provided BIP 32 derivation path is a child of the BIP 32 derivation path associated to the certificate.</p></div>
-<div class="paragraph"><p>The PaymentRequest is prepared by the host and passed to the dongle for validation and signature. Elements serialized as Protocol Buffers wire types other than 2 shall be provided in a single APDU. The tag and length of elements serialized as Protocol Buffer wire type 2 shall be provided in a single APDU.</p></div>
+<div class="paragraph"><p>The PaymentRequest is prepared by the host and passed to the dongle for validation and signature. Elements serialized as Protocol Buffers wire types other than 2 shall be provided in a single APDU. The tag and length of elements serialized as Protocol Buffer wire type 2 shall be provided in a single APDU. The output script and pki_type shall be provided as a single APDU.</p></div>
 <div class="paragraph"><p>The following elements of the PaymentRequest are validated by the dongle :</p></div>
 <div class="ulist"><ul>
-<li>
-<p>
-PaymentRequest.payment_details_version is set to 1
-</p>
-</li>
 <li>
 <p>
 PaymentRequest.pki_type is set to x509+sha256
@@ -3996,7 +4036,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">00 : prepare certificate</p>
 <p class="table">                    80 : confirm certificate</p></td>
 <td align="left" valign="top"><p class="table">00 : when preparing, first certificate block</p>
-<p class="table">                    80 : when preparing, next certificate block</p></td>
+<p class="table">                    01 : when preparing, more certificate blocks expected</p>
+<p class="table">                    80 : when preparing, last certificate block</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
@@ -4027,7 +4068,7 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-<div class="paragraph"><p><em>Input data (prepare certificate, next block)</em></p></div>
+<div class="paragraph"><p><em>Input data (prepare certificate, next block or last block)</em></p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -6076,12 +6117,12 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Nonce</p></td>
-<td align="left" valign="top"><p class="table">var</p></td>
-</tr>
-<tr>
 <td align="left" valign="top"><p class="table">Encrypted certificate private key</p></td>
 <td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Associated public key checksum</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 9)</p></td>
@@ -6100,8 +6141,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">4</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Associated public key checksum</p></td>
-<td align="left" valign="top"><p class="table">4</p></td>
+<td align="left" valign="top"><p class="table">Nonce</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Signature</p></td>
@@ -6136,12 +6177,20 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Nonce</p></td>
-<td align="left" valign="top"><p class="table">5</p></td>
-</tr>
-<tr>
 <td align="left" valign="top"><p class="table">Certificate public key</p></td>
 <td align="left" valign="top"><p class="table">65</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Subject Common Name length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Subject Common Name</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Nonce</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Signature</p></td>
@@ -6256,7 +6305,7 @@ Batch ID 02, Derivation Index ID 01 (post 1.4.11) : 04c370d4013107a98dfef01d6db5
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-09 06:14:16 CET
+Last updated 2015-01-14 18:37:32 CET
 </div>
 </div>
 </body>
