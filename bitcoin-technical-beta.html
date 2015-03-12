@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Ledger Wallet 1 : Technical Specification  (BETA)</title>
+<title>Ledger Wallet 1 : Common Technical Specifications  (BETA)</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,7 +735,7 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Ledger Wallet 1 : Technical Specification  (BETA)</h1>
+<h1>Ledger Wallet 1 : Common Technical Specifications  (BETA)</h1>
 <span id="author">Ledger Firmware Team</span><br />
 <span id="email"><tt>&lt;<a href="mailto:hello@ledger.fr">hello@ledger.fr</a>&gt;</tt></span><br />
 <span id="revdate">firmware version lw1-1.0 - work in progress</span>
@@ -756,12 +756,17 @@ asciidoc.install(2);
 </li>
 <li>
 <p>
+[bev] Update GET FIRMWARE VERSION to return device features
+</p>
+</li>
+<li>
+<p>
 [bev] Replace wipe PIN by random seed PIN
 </p>
 </li>
 <li>
 <p>
-[bev] Add an option to use the second factor permanently on SET OPERATION MODE (Ledger Wallet mode)
+[bev] Add an option to use the second factor permanently on SET OPERATION MODE and retrieve the second factor in use on GET OPERATION MODE (Ledger Wallet mode)
 </p>
 </li>
 <li>
@@ -772,6 +777,11 @@ asciidoc.install(2);
 <li>
 <p>
 [sec] Erase the dongle after 30 invalids second factor attempts
+</p>
+</li>
+<li>
+<p>
+[enh] Optional OP_RETURN payload in UNTRUSTED HASH TRANSACTION INPUT FINALIZE
 </p>
 </li>
 <li>
@@ -1098,7 +1108,9 @@ Initial release
 <div class="sect1">
 <h2 id="_about">16. About</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Ledger Wallet is a USB smartcard/dongle dedicated to secure bitcoin transactions. It performs all sensitive cryptographic operations related to a bitcoin transaction (key generation &amp; signature) onboard, and helps protect against malware in an untrusted environment by controlling the signed data.</p></div>
+<div class="paragraph"><p>This specification describes the common functionalities of Ledger applications dedicated to secure bitcoin transactions. Such application performs all sensitive cryptographic operations related to a bitcoin transaction (key generation &amp; signature) onboard, and helps protecting against malware in an untrusted environment by controlling the signed data.</p></div>
+<div class="paragraph"><p>The first supported device is Ledger Wallet, a USB smartcard/dongle.</p></div>
+<div class="paragraph"><p>Other devices can offer additional functionalities, such as a screen, buttons, different transport bearers or split functionalities between different hardware components leading to some differences in commands processing. Those differences are highlited in this common document and described more specifically in the dedicated device specification.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -1141,6 +1153,14 @@ The user enters the PIN to confirm user validation
 </p>
 </li>
 </ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Devices offering a screen and buttons do not support this validation mode</td>
+</tr></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_security_card_user_validation">17.2. Security Card User validation</h3>
@@ -1159,6 +1179,14 @@ The user types the result matching the random indexes in the printed card to con
 </li>
 </ul></div>
 <div class="paragraph"><p>This user validation method should be used with caution as a malware would be able to gather information from each unique Security Card after enough transactions are signed. It is recommended to only use it to pair an secure screen as described later or to print a new card after a few (around 10) transactions have been performed.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Devices offering a screen and buttons do not support this validation mode</td>
+</tr></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_secure_screen_user_validation">17.3. Secure Screen User validation</h3>
@@ -1181,6 +1209,14 @@ The remote device generates a signed version of the nonce which is sent to the L
 </p>
 </li>
 </ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Devices offering a screen and buttons managed by the secure part of the device do not support this validation mode</td>
+</tr></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_personal_bip_70_certificates_user_validation">17.4. Personal BIP 70 Certificates User validation</h3>
@@ -1355,6 +1391,14 @@ When generating a new seed in regular setup mode, the dongle types it on every o
 <div class="paragraph"><p>It is recommended to store the BIP32 seed returned in the output of the SETUP command in a safe location for backup purposes - typically GPG encrypt it to yourself and store it on multiple storage devices / clouds.</p></div>
 <div class="paragraph"><p>During setup, two random BIP 70 3DES-2 encryption and signature keys are generated.</p></div>
 <div class="paragraph"><p>The coin regular version and P2SH versions can be changed dynamically during a card session. They are initialized with the versions provided in the setup command at boot time.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Devices offering a screen and buttons will override the seed backup and PIN parameters to let the user enter it directly on device. Dummy values should be used from the caller.</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding">19.1.2. Coding</h4>
@@ -1880,6 +1924,14 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>When using the keycard second factor, the user needs to provide as authentication code random A characters of the destination address (up to 10)</p></div>
 <div class="paragraph"><p>This command allows the user to set a new keycard, similar to <a href="#Keycard">[Keycard]</a>. This keycard will replace the system keycard if a system keycard was defined, until the dongle is reset.</p></div>
 <div class="paragraph"><p>If no previous keycard was set, this command is confirmed by the standard keyboard second factor. After issuing it, the user needs to confirm it using the unique PIN displayed by the second factor. Otherwise it is confirmed by a 4 bytes challenge with the previous keycard. The dongle must be power cycled if the challenge is not correct.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">This command is not supported by devices offering a screen and buttons</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_2">19.2.2. Coding</h4>
@@ -1930,8 +1982,12 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Number of random address characters A to provide (1 byte) + keycard seed (16 bytes)</p></td>
-<td align="left" valign="top"><p class="table">11</p></td>
+<td align="left" valign="top"><p class="table">Number of random address characters to provide</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Keycard seed</p></td>
+<td align="left" valign="top"><p class="table">16</p></td>
 </tr>
 </tbody>
 </table>
@@ -2021,6 +2077,14 @@ The pairing process is completed on the dongle side if the challenge is correct,
 </p>
 </li>
 </ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">This command is not supported by devices offering a screen and buttons managed by the secure part of the device</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_3">19.3.2. Coding</h4>
@@ -2111,11 +2175,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Pairing blob : 8 bytes random nonce and (4 bytes keycard challenge</p></td>
-<td align="left" valign="top"><p class="table"></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">16 bytes pairing key) encrypted by the session key</p></td>
+<td align="left" valign="top"><p class="table">Pairing blob : 8 bytes random nonce and (4 bytes keycard challenge + 16 bytes pairing key) encrypted by the session key</p></td>
 <td align="left" valign="top"><p class="table">32</p></td>
 </tr>
 </tbody>
@@ -2208,6 +2268,14 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>After 3 invalid PIN submitted in a row, the dongle data is erased and it must be setup again.</p></div>
 <div class="paragraph"><p>If the secondary PIN is entered instead of the user PIN, a random seed generated when the dongle is setup is used.</p></div>
 <div class="paragraph"><p>If P1 is set to 0x80, the dongle returns the number of remaining attempts. Arbitrary data must still be sent (f.e. 1 byte)</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Devices offering a screen and buttons will override the PIN parameters to let the user enter it directly on device. Dummy values should be used from the caller.</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_5">19.5.2. Coding</h4>
@@ -2342,7 +2410,8 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">E0</p></td>
 <td align="left" valign="top"><p class="table">24</p></td>
-<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00 : query the dongle operation mode</p>
+<p class="table">01 : query the second factor currently used</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
@@ -2352,7 +2421,7 @@ cellspacing="0" cellpadding="4">
 </div>
 <div class="paragraph"><p><em>Input data</em></p></div>
 <div class="paragraph"><p>None</p></div>
-<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p><em>Output data (dongle operation mode)</em></p></div>
 <div class="tableblock">
 <table rules="all"
 width="80%"
@@ -2372,6 +2441,29 @@ cellspacing="0" cellpadding="4">
 <p class="table">      0x04 : server</p>
 <p class="table">      0x08 : developer</p>
 <p class="table">      0x80 : mask added if forward setup mode was used and the seed has not been redeemed yet</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (second factor in use)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Operation Mode</p>
+<p class="table">      0x11 : original second factor (keyboard validation method)</p>
+<p class="table">      0x12 : secondary second factor (security card)</p>
+<p class="table">      0x13 : secondary second factory (security card and secure screen)</p></td>
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 </tbody>
@@ -2462,6 +2554,14 @@ cellspacing="0" cellpadding="4">
 <h4 id="_description_8">19.8.1. Description</h4>
 <div class="paragraph"><p>This command sets or modifies the keymap and typing behaviour following dongle setup.</p></div>
 <div class="paragraph"><p>The keymap is encoded as in <a href="#KeymapEncoding">[KeymapEncoding]</a></p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">This command is not supported by devices offering a screen and buttons</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_8">19.8.2. Coding</h4>
@@ -2908,9 +3008,18 @@ cellspacing="0" cellpadding="4">
 <pre><tt>OP_HASH160 [script hash] OP_EQUAL</tt></pre>
 </div></div>
 <div class="paragraph"><p>The output amount, fees and change will be validated by the user in wallet or relaxed wallet modes.</p></div>
+<div class="paragraph"><p>A maximum 80 bytes OP_RETURN output script payload can be provided - it will be added to the transaction with a null amount</p></div>
 <div class="paragraph"><p>The generated transaction output data contains in pre-serialized form the number of outputs (target &amp; optionally change) and each output data</p></div>
 <div class="paragraph"><p>If a keycard seed has been provided, and the wallet is operating in standard mode with the alternate second factor activated, an alternate second factor validation scheme is used, see <a href="#Keycard">[Keycard]</a></p></div>
 <div class="paragraph"><p>After 30 invalid second factor challenges submitted in a row, the dongle data is erased and it must be setup again.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">On a device offering a screen and buttons, the confirmation will be prompted immediately and returned with code 0x00 (no confirmation requested) to the caller</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_12">20.4.2. Coding</h4>
@@ -2991,6 +3100,14 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">Last derivation index for the internal change address (big endian)</p></td>
 <td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Optional OP_RETURN output payload length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Optional OP_RETURN output payload</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 </tbody>
 </table>
@@ -3267,6 +3384,14 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>This command is used to compose an opaque SHA-256 hash for the transaction outputs</p></div>
 <div class="paragraph"><p>This command is rejected if all inputs advertised at the beginning of the transaction have not been processed first.</p></div>
 <div class="paragraph"><p>Output data can be split arbitrarily.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">On a device offering a screen and buttons, the confirmation will be prompted immediately and returned with code 0x00 (no confirmation requested) to the caller</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_14">20.6.2. Coding</h4>
@@ -3410,6 +3535,14 @@ Return the Base64 encoded version of P || r || s
 </li>
 </ul></div>
 <div class="paragraph"><p>If the low end word of one component of the BIP 32 derivation path includes 0xB11D or 0xB11E the message is immediately signed without confirmation (typically used for BitID). The dongle must be powercycled after signing with a derivation path containing 0xB11D.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">On a device offering a screen and buttons, the confirmation will be prompted immediately and returned with code 0x00 (no confirmation requested) to the caller. Limitations regarding the message content and length can be different.</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_15">20.7.2. Coding</h4>
@@ -3567,6 +3700,14 @@ cellspacing="0" cellpadding="4">
 <h4 id="_description_16">21.1.1. Description</h4>
 <div class="paragraph"><p>This command is used to store a user controlled trust root private key in a slot (3 slots are defined). It must be executed in a secure environment.</p></div>
 <div class="paragraph"><p>A keyboard second factor validation is required to proceed.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">On a device offering a screen and buttons, the confirmation will be prompted immediately.</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_16">21.1.2. Coding</h4>
@@ -4007,6 +4148,14 @@ cellspacing="0" cellpadding="4">
 <h3 id="_process_certificate_bip_70">21.4. PROCESS CERTIFICATE BIP 70</h3>
 <div class="paragraph"><p>This command is used to approve the future use of an external BIP 70 Certificate by a dongle.</p></div>
 <div class="paragraph"><p>After submitting the request, the certificate checksum is typed by the second factor. If validated and confirmed by the user, the encoded certificate valid for this dongle is returned.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">On a device offering a screen and buttons, the confirmation will be prompted immediately.</td>
+</tr></table>
+</div>
 <div class="sect3">
 <h4 id="_coding_19">21.4.1. Coding</h4>
 <div class="paragraph"><p><em>Command</em></p></div>
@@ -4165,8 +4314,8 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">E0</p></td>
 <td align="left" valign="top"><p class="table">38</p></td>
-<td align="left" valign="top"><p class="table">00 : first PaymentRequest chunk</p>
-<p class="table">80 : next PaymentRequest chunk</p></td>
+<td align="left" valign="top"><p class="table">00 : initialization</p>
+<p class="table">80 : PaymentRequest chunk</p></td>
 <td align="left" valign="top"><p class="table">00 : more PaymentRequest chunks expected</p>
 <p class="table">80 : last PaymentRequest chunk</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
@@ -5173,7 +5322,7 @@ cellspacing="0" cellpadding="4">
 <h3 id="_get_firmware_version">24.3. GET FIRMWARE VERSION</h3>
 <div class="sect3">
 <h4 id="_description_26">24.3.1. Description</h4>
-<div class="paragraph"><p>This command returns the firmware version of the dongle</p></div>
+<div class="paragraph"><p>This command returns the firmware version of the dongle and additional features supported</p></div>
 </div>
 <div class="sect3">
 <h4 id="_coding_30">24.3.2. Coding</h4>
@@ -5225,29 +5374,37 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Internal public keys compression flag</p>
-<p class="table">                    0x00 : keys are not compressed</p>
-<p class="table">                    0x01 : keys are compressed</p></td>
+<td align="left" valign="top"><p class="table">Features flag</p>
+<p class="table">                    0x01 : public keys are compressed (otherwise not compressed)</p>
+<p class="table">                    0x02 : implementation running with screen + buttons handled by the Secure Element</p>
+<p class="table">                    0x04 : implementation running with screen + buttons handled externally</p>
+<p class="table">                    0x08 : NFC transport and payment extensions supported</p>
+<p class="table">                    0x10 : BLE transport and low power extensions supported</p>
+<p class="table">                    0x20 : implementation running on a Trusted Execution Environment</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Architecture (only since Ledger Wallet, or RFU)</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Firmware major version</p></td>
-<td align="left" valign="top"><p class="table">02</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Firmware minor version</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Firmware patch version (0xFF since Ledger Wallet firmware)</p></td>
+<td align="left" valign="top"><p class="table">Firmware patch version</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Loader ID major version</p></td>
+<td align="left" valign="top"><p class="table">Loader ID major version (if applicable)</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Loader ID minor version</p></td>
+<td align="left" valign="top"><p class="table">Loader ID minor version (if applicable)</p></td>
 <td align="left" valign="top"><p class="table">01</p></td>
 </tr>
 </tbody>
@@ -5502,7 +5659,7 @@ cellspacing="0" cellpadding="4">
 <h3 id="_factory_initialize_keys">25.1. FACTORY INITIALIZE KEYS</h3>
 <div class="sect3">
 <h4 id="_description_29">25.1.1. Description</h4>
-<div class="paragraph"><p>This command is used to derive the factory update, attestation storage, BIP 70 initial Trust Root storage and optionally keycard keys from the shared rom key before issuance.</p></div>
+<div class="paragraph"><p>This command is used to derive the factory update, attestation storage, and optional BIP 70 initial Trust Root storage from the shared rom key before issuance.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_coding_33">25.1.2. Coding</h4>
@@ -5532,7 +5689,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">20</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">38 or 48</p></td>
+<td align="left" valign="top"><p class="table">28 or 38</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 </tr>
 </tbody>
@@ -5560,15 +5717,11 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">10</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">BIP 70 Trust Root key diversifier</p></td>
-<td align="left" valign="top"><p class="table">10</p></td>
-</tr>
-<tr>
 <td align="left" valign="top"><p class="table">Firmware update key diversifier</p></td>
 <td align="left" valign="top"><p class="table">10</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Keycard key diversifier</p></td>
+<td align="left" valign="top"><p class="table">BIP 70 Trust Root key diversifier</p></td>
 <td align="left" valign="top"><p class="table">10</p></td>
 </tr>
 </tbody>
@@ -5757,7 +5910,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">26</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
-<td align="left" valign="top"><p class="table">1B</p></td>
+<td align="left" valign="top"><p class="table">11</p></td>
 <td align="left" valign="top"><p class="table">00</p></td>
 </tr>
 </tbody>
@@ -5777,8 +5930,12 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Wrapped number of random address characters A to provide (1 byte) + keycard seed (16 bytes)</p></td>
-<td align="left" valign="top"><p class="table">1B</p></td>
+<td align="left" valign="top"><p class="table">Number of random address characters to provide</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Keycard seed</p></td>
+<td align="left" valign="top"><p class="table">16</p></td>
 </tr>
 </tbody>
 </table>
@@ -5843,19 +6000,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Wrapped (slot index</p></td>
-<td align="left" valign="top"><p class="table"></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Trust root identity length</p></td>
-<td align="left" valign="top"><p class="table"></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">Trust root identity (max 20 bytes)</p></td>
-<td align="left" valign="top"><p class="table"></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">BIP 70 Trust Root private key)</p></td>
+<td align="left" valign="top"><p class="table">Wrapped (slot index + Trust root identity length + Trust root identity (max 20 bytes) + BIP 70 Trust Root private key)</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
 </tbody>
@@ -5873,6 +6018,14 @@ cellspacing="0" cellpadding="4">
 <h4 id="_description_34">25.6.1. Description</h4>
 <div class="paragraph"><p>This command is used to update the dongle firmware.</p></div>
 <div class="paragraph"><p>The dongle must not been set up to issue this command - if the dongle is set up, first wipe the user data by issuing the wrong user PIN 3 times.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Support of this APDU is device dependent.</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_coding_38">25.6.2. Coding</h4>
@@ -5938,7 +6091,173 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_status_words">26. Status Words</h2>
+<h2 id="_transport_protocol">26. Transport protocol</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_general_transport_description">26.1. General transport description</h3>
+<div class="paragraph"><p>Ledger APDUs requests and responses are encapsulated using a flexible protocol allowing to fragment large payloads over different underlying transport mechanisms.</p></div>
+<div class="paragraph"><p>The common transport header is defined as follows :</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Communication channel ID (big endian)</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Command tag</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Packet sequence index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Payload</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>The Communication channel ID allows commands multiplexing over the same physical link. It is not used for the time being, and should be set to 0101 to avoid compatibility issues with implementations ignoring a leading 00 byte.</p></div>
+<div class="paragraph"><p>The Command tag describes the message content. Use TAG_APDU (0x05) for standard APDU payloads, or TAG_PING (0x02) for a simple link test.</p></div>
+<div class="paragraph"><p>The Packet sequence index describes the current sequence for fragmented payloads. The first fragment index is 0x00.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_apdu_command_payload_encoding">26.2. APDU Command payload encoding</h3>
+<div class="paragraph"><p>APDU Command payloads are encoded as follows :</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU length (big endian)</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU CLA</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU INS</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU P1</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU P2</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU length</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Optional APDU data</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>APDU payload is encoded according to the APDU case</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Case Number</p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+<td align="left" valign="top"><p class="table">Case description</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">1</p></td>
+<td align="left" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">No data in either direction - L is set to 00</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">2</p></td>
+<td align="left" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">!0</p></td>
+<td align="left" valign="top"><p class="table">Input Data present, no Output Data - L is set to Lc</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">3</p></td>
+<td align="left" valign="top"><p class="table">!0</p></td>
+<td align="left" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">Output Data present, no Input Data - L is set to Le</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">4</p></td>
+<td align="left" valign="top"><p class="table">!0</p></td>
+<td align="left" valign="top"><p class="table">!0</p></td>
+<td align="left" valign="top"><p class="table">Both Input and Output Data are present - L is set to Lc</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apdu_response_payload_encoding">26.3. APDU Response payload encoding</h3>
+<div class="paragraph"><p>APDU Response payloads are encoded as follows :</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU response length (big endian)</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">APDU response data and Status Word</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usb_mapping">26.4. USB mapping</h3>
+<div class="paragraph"><p>Messages are exchanged with the dongle over HID endpoints over interrupt transfers, with each chunk being 64 bytes long. The HID Report ID is ignored.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_status_words">27. Status Words</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The following standard Status Words are returned for all APDUs - some specific Status Words can be used for specific commands and are mentioned in the command description.</p></div>
 <div class="paragraph"><p><em>Status Words</em></p></div>
@@ -5988,11 +6307,11 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_data_structures">27. Data structures</h2>
+<h2 id="_data_structures">28. Data structures</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The format of the data structures is provided for interoperability and validation purposes. A typical user will not need to manipulate them directly.</p></div>
 <div class="sect2">
-<h3 id="_encoded_private_key_in_developer_mode">27.1. Encoded private key in developer mode</h3>
+<h3 id="_encoded_private_key_in_developer_mode">28.1. Encoded private key in developer mode</h3>
 <div class="paragraph"><p>An encoded private key is stored internally as follow. The private key component (S) and optional chain are triple DES encrypted by the developer mode wrapping key in CBC mode with a null IV (as S alone or S concatenated to the chain code)</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -6045,7 +6364,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encoded_trusted_input">27.2. Encoded trusted input</h3>
+<h3 id="_encoded_trusted_input">28.2. Encoded trusted input</h3>
 <div class="paragraph"><p>An encoded trusted input is stored internally as follow. The signature is the last block of a Triple DES CBC encryption of the previous data by the trusted input encryption key.</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -6093,7 +6412,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encoded_private_part_of_a_bip_70_personal_certificate">27.3. Encoded private part of a BIP 70 Personal Certificate</h3>
+<h3 id="_encoded_private_part_of_a_bip_70_personal_certificate">28.3. Encoded private part of a BIP 70 Personal Certificate</h3>
 <div class="paragraph"><p>An encoded private part of a BIP 70 Personal Certificate is stored internally as follow. The private key component is triple DES encrypted by the BIP 70 encryption key in CBC mode with a null IV. The signature is the last block of a Triple DES CBC encryption of the previous data by the BIP 70 signature key.</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -6153,7 +6472,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encoded_bip_70_personal_certificate_for_dongle_consumption">27.4. Encoded BIP 70 Personal Certificate for dongle consumption</h3>
+<h3 id="_encoded_bip_70_personal_certificate_for_dongle_consumption">28.4. Encoded BIP 70 Personal Certificate for dongle consumption</h3>
 <div class="paragraph"><p>An encoded BIP 70 Personal Certificate for dongle consumption is stored internally as follow. The signature is the last block of a Triple DES CBC encryption of the previous data by the BIP 70 signature key.</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -6201,7 +6520,7 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encoded_bip_70_paymentrequest_for_dongle_consumption">27.5. Encoded BIP 70 PaymentRequest for dongle consumption</h3>
+<h3 id="_encoded_bip_70_paymentrequest_for_dongle_consumption">28.5. Encoded BIP 70 PaymentRequest for dongle consumption</h3>
 <div class="paragraph"><p>An encoded BIP 70 PaymentRequest for dongle consumption is stored internally as follow. The signature is the last block of a Triple DES CBC encryption of the previous data by the BIP 70 signature key.</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -6225,10 +6544,6 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">1</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Nonce</p></td>
-<td align="left" valign="top"><p class="table">var</p></td>
-</tr>
-<tr>
 <td align="left" valign="top"><p class="table">Amount</p></td>
 <td align="left" valign="top"><p class="table">8</p></td>
 </tr>
@@ -6240,12 +6555,16 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">Output script</p></td>
 <td align="left" valign="top"><p class="table">var</p></td>
 </tr>
+<tr>
+<td align="left" valign="top"><p class="table">Nonce</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_specific_data_transport_for_firmware_update_or_private_key_attestation_storage">27.6. Specific data transport for firmware update or private key attestation storage</h3>
+<h3 id="_specific_data_transport_for_firmware_update_or_private_key_attestation_storage">28.6. Specific data transport for firmware update or private key attestation storage</h3>
 <div class="paragraph"><p>Data sent for firmware update or private key attestation storage is formatted as follows, encrypted by either the diversified firmware update key or the diversified attestation storage key</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -6284,9 +6603,9 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_attestation_keys">28. Attestation keys</h2>
+<h2 id="_attestation_keys">29. Attestation keys</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The following Attestation keys are used</p></div>
+<div class="paragraph"><p>The following Attestation keys are used for production versions :</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -6299,13 +6618,15 @@ Batch ID 02, Derivation Index ID 01 (post 1.4.11) : 04c370d4013107a98dfef01d6db5
 </p>
 </li>
 </ul></div>
+<div class="paragraph"><p>The following Attestation key is used for test versions :</p></div>
+<div class="paragraph"><p>04e69fd3c044865200e66f124b5ea237c918503931bee070edfcab79a00a25d6b5a09afbee902b4b763ecf1f9c25f82d6b0cf72bce3faf98523a1066948f1a395f</p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-14 18:37:32 CET
+Last updated 2015-03-12 12:08:13 CET
 </div>
 </div>
 </body>
