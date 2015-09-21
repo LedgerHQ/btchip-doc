@@ -1,0 +1,1896 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Ledger Wallet : Java Card extensions</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Ledger Wallet : Java Card extensions</h1>
+<span id="author">Ledger</span><br />
+<span id="email"><tt>&lt;<a href="mailto:hello@ledger.fr">hello@ledger.fr</a>&gt;</tt></span><br />
+<span id="revdate">version 1.0 - 09.21.15-1</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_1_0">1. 1.0</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Public release
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about">2. About</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This specification describes extensions to the general specification used by the Java Card implementation of Ledger Wallet, and differences between the Open Source version avaialble at <a href="https://github.com/LedgerHQ/ledger-javacard">https://github.com/LedgerHQ/ledger-javacard</a> and specific versions implementing the Proprietary API interface described in com.ledger.wallet.ProprietaryAPI</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_personalization_apdus">3. Personalization APDUs</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Since it might not be convenient to initialize a contactless applet on an airgapped computer an additional pairing system is defined.</p></div>
+<div class="paragraph"><p>When the applet instance is created, it is provisioned with a unique keypair and signature of its public key. This keypair will be used as an attestation key for ephemeral keys when establishing a symmetric key with the airgapped computer through an ECDH exchange.</p></div>
+<div class="paragraph"><p>After agreeing on a symmetric key, that key will be used to encrypt the keycard, the recovery seed or a seed generated by the applet.</p></div>
+<div class="sect2">
+<h3 id="_installation_parameters">3.1. Installation parameters</h3>
+<div class="paragraph"><p>The following installation parameters are expected if you wish to use the personalization features</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Attestation private key</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Attestation public key signature</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>Then the Attestation public key shall be set using the SET ATTESTATION PUBLIC KEY APDU following the instance creation</p></div>
+</div>
+<div class="sect2">
+<h3 id="_perform_airgap_key_agreement">3.2. PERFORM AIRGAP KEY AGREEMENT</h3>
+<div class="sect3">
+<h4 id="_description">3.2.1. Description</h4>
+<div class="paragraph"><p>This command is used to negociate a secret key with a remote host, supposedly disconnected. The 32 bytes negociated secret will be used to encrypt sensitive material with AES-256 CBC.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding">3.2.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">40</p></td>
+<td align="left" valign="top"><p class="table">01 : Initiate pairing</p>
+<p class="table">02 : Confirm pairing</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (for Initiate pairing)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Remote party uncompressed public key</p></td>
+<td align="left" valign="top"><p class="table">65</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (for Confirm pairing)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Secret key AES-256 CBC encrypted by the negociated secret</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (for Initiate pairing)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Ephemeral uncompressed public key</p></td>
+<td align="left" valign="top"><p class="table">65</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Ephemeral uncompressed public key DER signature by the attestation key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (for Confirm pairing)</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is only available before setup</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_airgap">3.3. SETUP AIRGAP</h3>
+<div class="sect3">
+<h4 id="_description_2">3.3.1. Description</h4>
+<div class="paragraph"><p>This command is similar to the SETUP command, encoded for regular setup.</p></div>
+<div class="paragraph"><p>If a recovery seed is provided, it is decrypted by the previously negociated key.</p></div>
+<div class="paragraph"><p>If no recovery seed is provided, the output parameters are modified to include the encrypted application generated random seed.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_2">3.3.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">42</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p>See SETUP input data parameters for regular setup.</p></div>
+<div class="paragraph"><p><em>Output data (if developer mode is supported)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Seed return flag</p>
+<p class="table">      0xF0 : encrypted seed available</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">3DES-2 trusted input key</p></td>
+<td align="left" valign="top"><p class="table">16</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">3DES-2 key wrapping key for developer mode</p></td>
+<td align="left" valign="top"><p class="table">16</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">AES-256 CBC encrypted seed</p></td>
+<td align="left" valign="top"><p class="table">64</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (if developer mode is not supported)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Seed return flag</p>
+<p class="table">      0xF0 : encrypted seed available</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">AES-256 CBC encrypted seed</p></td>
+<td align="left" valign="top"><p class="table">64</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is only available before setup</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_factory_initialize_keycard_seed_airgap">3.4. FACTORY INITIALIZE KEYCARD SEED AIRGAP</h3>
+<div class="sect3">
+<h4 id="_description_3">3.4.1. Description</h4>
+<div class="paragraph"><p>This command is similar to the FACTORY INITIALIZE KEYCARD SEED command, with the seed content encrypted by the previously negociated key</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_3">3.4.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">44</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">11</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Number of random address characters to provide</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Encrypted keycard seed</p></td>
+<td align="left" valign="top"><p class="table">16</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is only available before setup</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_user_keycard_airgap">3.5. SET USER KEYCARD AIRGAP</h3>
+<div class="sect3">
+<h4 id="_description_4">3.5.1. Description</h4>
+<div class="paragraph"><p>This command is similar to the SET USER KEYCARD command, with the seed content encrypted by the previously negociated key</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_4">3.5.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">46</p></td>
+<td align="left" valign="top"><p class="table">01 : set keycard</p>
+<p class="table">02 : confirm keycard</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">11</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (set keycard)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Number of random address characters to provide</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Encrypted keycard seed</p></td>
+<td align="left" valign="top"><p class="table">16</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data (confirm keycard)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Confirmation challenge</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (set keycard)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Confirmation mode
+         02 : previous keycard challenge</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Challenge to match</p></td>
+<td align="left" valign="top"><p class="table">04</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data (confirm keycard)</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available following dongle setup, and is protected by the user PIN.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_attestation_public_key">3.6. SET ATTESTATION PUBLIC KEY</h3>
+<div class="sect3">
+<h4 id="_description_5">3.6.1. Description</h4>
+<div class="paragraph"><p>This command is used during the personalization process to push the public key associated to the attestation private key sent in the installation parameters over a secure channel</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_5">3.6.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">48</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">41</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Attestation public key</p></td>
+<td align="left" valign="top"><p class="table">65</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is only available before the dongle is setup</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_attestation">3.7. GET ATTESTATION</h3>
+<div class="sect3">
+<h4 id="_description_6">3.7.1. Description</h4>
+<div class="paragraph"><p>This command is used to return the attestation public key and its signature</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_6">3.7.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">4A</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Unique attestation public key</p></td>
+<td align="left" valign="top"><p class="table">65</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Ledger attestation public key DER signature</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is only available before the dongle is setup</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_public_key_derivation_apdus">4. Public key derivation APDUs</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Additional APIs are defined to handle platforms which do not support full key agreement described in the Proprietary API allowing to obtain the X and Y components of a public key from its private key</p></div>
+<div class="sect2">
+<h3 id="_get_half_public_key">4.1. GET HALF PUBLIC KEY</h3>
+<div class="sect3">
+<h4 id="_description_7">4.1.1. Description</h4>
+<div class="paragraph"><p>This command returns the X component of a public key a signature to recover the Y component</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_7">4.1.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">20</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 10)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">First derivation index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&#8230;</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Last derivation index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Nonce to be signed</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">X component of the public key</p></td>
+<td align="left" valign="top"><p class="table">32</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">DER encoded signature of the Nonce with the associated private key</p></td>
+<td align="left" valign="top"><p class="table">var</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available if no proprietary API is available following dongle setup in standard wallet, relaxed wallet and server operation modes, and is protected by the user PIN if not ready to sign.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_put_public_key_cache">4.2. PUT PUBLIC KEY CACHE</h3>
+<div class="sect3">
+<h4 id="_description_8">4.2.1. Description</h4>
+<div class="paragraph"><p>This command stores a public key into the applet internal cache to use the regular application flow on platforms that cannot recover the Y component of a public key by themselves.</p></div>
+<div class="paragraph"><p>The validity of the public key is enforced by checking a random nonce signature before updating the cache.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_8">4.2.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">22</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 10)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">First derivation index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&#8230;</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Last derivation index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Uncompressed public key</p></td>
+<td align="left" valign="top"><p class="table">64</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available if no proprietary API is available following dongle setup in standard wallet, relaxed wallet and server operation modes</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_has_public_key_cache">4.3. HAS PUBLIC KEY CACHE</h3>
+<div class="sect3">
+<h4 id="_description_9">4.3.1. Description</h4>
+<div class="paragraph"><p>This command checks if a public key is present in the applet internal cache</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_9">4.3.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">24</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">variable</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Number of BIP 32 derivations to perform (max 10)</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">First derivation index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&#8230;</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Last derivation index (big endian)</p></td>
+<td align="left" valign="top"><p class="table">4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Flag</p>
+<p class="table">     01 : public key was found in cache</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available if no proprietary API is available following dongle setup in standard wallet, relaxed wallet and server operation modes</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_information_apdus">5. Information APDUs</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_get_java_card_features">5.1. GET JAVA CARD FEATURES</h3>
+<div class="sect3">
+<h4 id="_description_10">5.1.1. Description</h4>
+<div class="paragraph"><p>This command returns information about specific Java Card features supported by this implementation</p></div>
+</div>
+<div class="sect3">
+<h4 id="_coding_10">5.1.2. Coding</h4>
+<div class="paragraph"><p><em>Command</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>CLA</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>INS</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P1</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>P2</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Lc</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Le</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F0</p></td>
+<td align="left" valign="top"><p class="table">26</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">00</p></td>
+<td align="left" valign="top"><p class="table">01</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Input data</em></p></div>
+<div class="paragraph"><p>None</p></div>
+<div class="paragraph"><p><em>Output data</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><strong>Description</strong></p></td>
+<td align="left" valign="top"><p class="table"><strong>Length</strong></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Flag</p>
+<p class="table">     01 : a proprietary API implementation (as in ProprietaryApi.java interface implementation) is available</p></td>
+<td align="left" valign="top"><p class="table">1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p><em>Availability</em></p></div>
+<div class="paragraph"><p>This function is always available</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_generic_apdus_support">6. Generic APDUs support</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This chapter reviews the differences between the Generic APDUs described on <a href="https://ledgerhq.github.io/btchip-doc/bitcoin-technical.html">https://ledgerhq.github.io/btchip-doc/bitcoin-technical.html</a> and their implementation on the Java Card implementation</p></div>
+<div class="sect2">
+<h3 id="_lifecycle_management_apdus">6.1. Lifecycle management APDUs</h3>
+<div class="sect3">
+<h4 id="_setup">6.1.1. SETUP</h4>
+<div class="paragraph"><p>Only regular setup and recovery are supported. The seed is displayed on the NDEF interface instead of being typed if the NDEF applet is installed</p></div>
+</div>
+<div class="sect3">
+<h4 id="_set_user_keycard">6.1.2. SET USER KEYCARD</h4>
+<div class="paragraph"><p>This APDU is implemented as is</p></div>
+</div>
+<div class="sect3">
+<h4 id="_setup_secure_screen">6.1.3. SETUP SECURE SCREEN</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_set_alternate_coin_versions">6.1.4. SET ALTERNATE COIN VERSIONS</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_verify_pin">6.1.5. VERIFY PIN</h4>
+<div class="paragraph"><p>This APDU is implemented as is</p></div>
+</div>
+<div class="sect3">
+<h4 id="_get_operation_mode">6.1.6. GET OPERATION MODE</h4>
+<div class="paragraph"><p>This APDU is implemented as is (but modes are not supported)</p></div>
+</div>
+<div class="sect3">
+<h4 id="_set_operation_mode">6.1.7. SET OPERATION MODE</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_set_keyboard_configuration">6.1.8. SET KEYBOARD CONFIGURATION</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wallet_usage_apdus">6.2. Wallet usage APDUs</h3>
+<div class="sect3">
+<h4 id="_get_wallet_public_key">6.2.1. GET WALLET PUBLIC KEY</h4>
+<div class="paragraph"><p>This APDU is implemented as is</p></div>
+</div>
+<div class="sect3">
+<h4 id="_get_trusted_input">6.2.2. GET TRUSTED INPUT</h4>
+<div class="paragraph"><p>This APDU is implemented as is</p></div>
+</div>
+<div class="sect3">
+<h4 id="_untrusted_hash_transaction_input_start">6.2.3. UNTRUSTED HASH TRANSACTION INPUT START</h4>
+<div class="paragraph"><p>This APDU is implemented as is</p></div>
+</div>
+<div class="sect3">
+<h4 id="_untrusted_hash_transaction_input_finalize">6.2.4. UNTRUSTED HASH TRANSACTION INPUT FINALIZE</h4>
+<div class="paragraph"><p>This APDU is implemented as is (with a different second factor logic)</p></div>
+</div>
+<div class="sect3">
+<h4 id="_untrusted_hash_sign">6.2.5. UNTRUSTED HASH SIGN</h4>
+<div class="paragraph"><p>This APDU is implemented as is</p></div>
+</div>
+<div class="sect3">
+<h4 id="_untrusted_hash_transaction_input_finalize_full">6.2.6. UNTRUSTED HASH TRANSACTION INPUT FINALIZE FULL</h4>
+<div class="paragraph"><p>This APDU is implemented as is (with a different second factor logic)</p></div>
+</div>
+<div class="sect3">
+<h4 id="_sign_message">6.2.7. SIGN MESSAGE</h4>
+<div class="paragraph"><p>This APDU is only supported on direct BitID signature paths (including SLIP 13)</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_personal_bip_70_certificates_apdus">6.3. Personal BIP 70 Certificates APDUs</h3>
+<div class="sect3">
+<h4 id="_store_trust_root_bip_70">6.3.1. STORE TRUST ROOT BIP 70</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_create_certificate_bip_70">6.3.2. CREATE CERTIFICATE BIP 70</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_create_payment_request_bip_70">6.3.3. CREATE PAYMENT REQUEST BIP 70</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_process_certificate_bip_70">6.3.4. PROCESS CERTIFICATE BIP 70</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_parse_payment_request_bip_70">6.3.5. PARSE PAYMENT REQUEST BIP 70</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_untrusted_hash_transaction_input_finalize_bip_70">6.3.6. UNTRUSTED HASH TRANSACTION INPUT FINALIZE BIP 70</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_server_mode_apdus">6.4. Server mode APDUs</h3>
+<div class="sect3">
+<h4 id="_get_transaction_limit">6.4.1. GET TRANSACTION LIMIT</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_set_transaction_limit">6.4.2. SET TRANSACTION LIMIT</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_developer_mode_apdus">6.5. Developer mode APDUs</h3>
+<div class="sect3">
+<h4 id="_import_private_key">6.5.1. IMPORT PRIVATE KEY</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_get_public_key">6.5.2. GET PUBLIC KEY</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_derive_bip32_key">6.5.3. DERIVE BIP32 KEY</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_ecdsa_sign_verify_immediate">6.5.4. ECDSA SIGN/VERIFY IMMEDIATE</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_test_and_utility_apdus">6.6. Test and utility APDUs</h3>
+<div class="sect3">
+<h4 id="_get_random">6.6.1. GET RANDOM</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_get_device_attestation">6.6.2. GET DEVICE ATTESTATION</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_get_firmware_attestation">6.6.3. GET FIRMWARE ATTESTATION</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_compose_m_of_n_address">6.6.4. COMPOSE M OF N ADDRESS</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_get_point_of_sale_seed">6.6.5. GET POINT OF SALE SEED</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vendor_management_apdus">6.7. Vendor management APDUs</h3>
+<div class="sect3">
+<h4 id="_factory_initialize_keys">6.7.1. FACTORY INITIALIZE KEYS</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_factory_initialize_attestation">6.7.2. FACTORY INITIALIZE ATTESTATION</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_get_firmware_update_id">6.7.3. GET FIRMWARE UPDATE ID</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+<div class="sect3">
+<h4 id="_factory_initialize_keycard_seed">6.7.4. FACTORY INITIALIZE KEYCARD SEED</h4>
+<div class="paragraph"><p>This APDU is implemented as is</p></div>
+</div>
+<div class="sect3">
+<h4 id="_factory_initialize_bip_70_trust_root">6.7.5. FACTORY INITIALIZE BIP 70 TRUST ROOT</h4>
+<div class="paragraph"><p>This APDU is not supported yet</p></div>
+</div>
+<div class="sect3">
+<h4 id="_firmware_update">6.7.6. FIRMWARE UPDATE</h4>
+<div class="paragraph"><p>This APDU is not supported</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transport_protocol">7. Transport protocol</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The Java Card application uses the standard ISO 7816 or 14443 transport protocols</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2015-09-21 23:23:08 CEST
+</div>
+</div>
+</body>
+</html>
